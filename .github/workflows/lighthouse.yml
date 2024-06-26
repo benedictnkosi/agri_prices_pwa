@@ -27,6 +27,9 @@ jobs:
       - name: Install jq
         run: sudo apt-get install -y jq
 
+      - name: Start App
+        run: npm run dev
+
       - name: Run Lighthouse and check performance
         run: |
           cd lighthouse
