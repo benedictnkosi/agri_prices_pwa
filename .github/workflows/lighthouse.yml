@@ -30,6 +30,9 @@ jobs:
       - name: Install jq
         run: sudo apt-get install -y jq
 
+      - name: Install xvfb
+        run: sudo apt-get install -y xvfb
+        
       - name: Start App
         run: |
           nohup npm run dev &
@@ -40,7 +43,7 @@ jobs:
         run: |
           cd lighthouse
           chmod +x check_performance.sh
-          ./check_performance.sh http://localhost:5173/ lighthouse_desktop.json
+          xvfb-run --auto-servernum --server-args='-screen 0 1280x1024x24' ./check_performance.sh http://localhost:5173 lighthouse_desktop.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
