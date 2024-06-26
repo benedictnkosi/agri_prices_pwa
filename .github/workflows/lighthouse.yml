@@ -36,7 +36,7 @@ jobs:
       - name: Start App
         run: |
           nohup npm run dev &
-          sleep 30 # Wait for a while to ensure the app starts
+          sleep 5 # Wait for a while to ensure the app starts
           curl --retry 5 --retry-delay 10 --retry-connrefused http://localhost:5173
 
       - name: Run Lighthouse and check performance
