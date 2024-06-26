@@ -40,7 +40,7 @@ jobs:
         run: |
           cd lighthouse
           chmod +x check_performance.sh
-          ./check_performance.sh http://localhost:5173/ custom-config.json
+          ./check_performance.sh http://localhost:5173/ lighthouse_desktop.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
