@@ -41,7 +41,7 @@ jobs:
           cd lighthouse
           which bc
           chmod +x check_performance.sh
-          xvfb-run --auto-servernum --server-args='-screen 0 1280x1024x24' ./check_performance.sh --output html --output-path ./lighthouse_report.html http://localhost:5173
+          xvfb-run --auto-servernum --server-args='-screen 0 1280x1024x24' ./check_performance.sh  http://localhost:5173
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
@@ -50,4 +50,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: lighthouse-report
-          path: lighthouse/lighthouse_report.html
+          path: lighthouse/report.html
