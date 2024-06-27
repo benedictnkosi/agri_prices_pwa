@@ -7,9 +7,9 @@ CONFIG_PATH=$2
 lighthouse "$URL" --config-path="$CONFIG_PATH" --output json --output html --output-path ./report
 
 # Extract the performance score using jq
-performance_score=$(jq -r '.categories.performance.score' ./reportreport.json)
-accessibility_score=$(jq -r '.categories.accessibility.score' ./reportreport.json)
-best_practices_score=$(jq -r '.categories["best-practices"].score' ./reportreport.json)
+performance_score=$(jq -r '.categories.performance.score' ./report/report.json)
+accessibility_score=$(jq -r '.categories.accessibility.score' ./report/report.json)
+best_practices_score=$(jq -r '.categories["best-practices"].score' ./report/report.json)
 
 # Convert the score to a percentage using awk
 performance_percentage=$(awk "BEGIN { printf \"%.2f\", $performance_score * 100 }")
