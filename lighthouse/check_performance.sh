@@ -4,7 +4,7 @@ URL=$1
 CONFIG_PATH=$2
 
 # Run Lighthouse CLI with custom configuration
-lighthouse "$URL" --config-path="lighthouse_desktop.json" --output json --output html --output-path ./lightouse
+lighthouse "$URL" --config-path="$CONFIG_PATH" --output json --output html --output-path ./lightouse
 
 # Extract the performance score using jq
 performance_score=$(jq -r '.categories.performance.score' lightouse.report.json)
