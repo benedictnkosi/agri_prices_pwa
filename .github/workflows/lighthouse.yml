@@ -25,7 +25,7 @@ jobs:
         run: npm install
 
       - name: Install Lighthouse
-        run: npm install lighthouse
+        run: npm install -g lighthouse
         
       - name: Install jq
         run: sudo apt-get install -y jq
