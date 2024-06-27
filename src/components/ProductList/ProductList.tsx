@@ -9,6 +9,9 @@ interface ProductListItemProps {
   onSelect: (productId: string) => void;
 }
 
+const apiUrl = import.meta.env.VITE_PRODUCTS_API_URL
+console.log("API URL:", apiUrl);
+
 const ProductListItem = ({
   product,
   isSelected,
@@ -58,7 +61,7 @@ export const ProductList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5173/api/products")
+      .get(apiUrl)
       .then((response) => {
         setProducts(response.data);
       })
