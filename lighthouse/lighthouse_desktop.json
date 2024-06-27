@@ -4,10 +4,10 @@
     "emulatedFormFactor": "desktop",
     "throttling": {
       "rttMs": 40,
-      "throughputKbps": 20000,
+      "throughputKbps": 40000,
       "requestLatencyMs": 0,
-      "downloadThroughputKbps": 20000,
-      "uploadThroughputKbps": 5000,
+      "downloadThroughputKbps": 40000,
+      "uploadThroughputKbps": 10000,
       "cpuSlowdownMultiplier": 1
     },
     "screenEmulation": {
