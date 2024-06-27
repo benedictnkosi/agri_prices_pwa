@@ -6,13 +6,10 @@ CONFIG_PATH=$2
 # Run Lighthouse CLI with custom configuration
 lighthouse "$URL" --config-path="$CONFIG_PATH" --output json --output html --output-path ./report
 
-# Print the content of the folder
-ls -l
-
 # Extract the performance score using jq
-performance_score=$(jq -r '.categories.performance.score' ./report/report.json)
-accessibility_score=$(jq -r '.categories.accessibility.score' ./report/report.json)
-best_practices_score=$(jq -r '.categories["best-practices"].score' ./report/report.json)
+performance_score=$(jq -r '.categories.performance.score' report.json)
+accessibility_score=$(jq -r '.categories.accessibility.score' report.json)
+best_practices_score=$(jq -r '.categories["best-practices"].score' report.json)
 
 # Convert the score to a percentage using awk
 performance_percentage=$(awk "BEGIN { printf \"%.2f\", $performance_score * 100 }")
