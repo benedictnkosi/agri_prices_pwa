@@ -6,6 +6,9 @@ CONFIG_PATH=$2
 # Run Lighthouse CLI with custom configuration
 lighthouse "$URL" --config-path="$CONFIG_PATH" --output json --output html --output-path ./report
 
+# Print the content of the folder
+ls -l
+
 # Extract the performance score using jq
 performance_score=$(jq -r '.categories.performance.score' ./report/report.json)
 accessibility_score=$(jq -r '.categories.accessibility.score' ./report/report.json)
