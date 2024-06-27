@@ -35,7 +35,7 @@ const ProductListItem = ({
         <div className={styles["column"]}>
           <div className={styles["price"]}>
             <span className={styles["row"]}>From</span>
-            <span className={styles["value"]}>£{product.price}.00</span>
+            <span className={styles["value"]}>{product.currencySymbol}{product.price}.00</span>
           </div>
         </div>
         <button
