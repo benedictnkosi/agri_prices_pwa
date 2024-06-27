@@ -44,7 +44,7 @@ jobs:
           cd lighthouse
           which bc
           chmod +x check_performance.sh
-          xvfb-run --auto-servernum --server-args='-screen 0 1280x1024x24' ./check_performance.sh  http://localhost:5173 lighthouse_desktop.json
+          xvfb-run --auto-servernum --server-args='-screen 0 1280x1024x24' ./check_performance.sh  http://localhost:5173 'lighthouse_desktop.json'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash

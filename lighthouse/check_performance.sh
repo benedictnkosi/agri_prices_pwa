@@ -2,14 +2,15 @@
 
 URL=$1
 CONFIG_PATH=$2
+TEST_TYPE=$3
 
 # Run Lighthouse CLI with custom configuration
-lighthouse "$URL" --config-path="$CONFIG_PATH" --output json --output html --output-path ./lightouse
+lighthouse "$URL" --config-path="$CONFIG_PATH" --output json --output html --output-path ./"$TEST_TYPE"
 
 # Extract the performance score using jq
-performance_score=$(jq -r '.categories.performance.score' lightouse.report.json)
-accessibility_score=$(jq -r '.categories.accessibility.score' lightouse.report.json)
-best_practices_score=$(jq -r '.categories["best-practices"].score' lightouse.report.json)
+performance_score=$(jq -r '.categories.performance.score' $TEST_TYPE.report.json)
+accessibility_score=$(jq -r '.categories.accessibility.score' $TEST_TYPE.report.json)
+best_practices_score=$(jq -r '.categories["best-practices"].score' $TEST_TYPE.report.json)
 
 # Convert the score to a percentage using awk
 performance_percentage=$(awk "BEGIN { printf \"%.2f\", $performance_score * 100 }")
