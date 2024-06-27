@@ -50,6 +50,7 @@ jobs:
         shell: bash
 
       - name: Upload Lighthouse Report
+        if: ${{ always() }}
         uses: actions/upload-artifact@v2
         with:
           name: lighthouse-report
