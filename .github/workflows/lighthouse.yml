@@ -24,7 +24,7 @@ jobs:
       - name: npm install
         run: npm install
 
-      - name: npm install
+      - name: Install Lighthouse
         run: npm install lighthouse
 
       - name: Install jq
