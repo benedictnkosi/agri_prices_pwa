@@ -38,24 +38,19 @@ jobs:
           cd lighthouse
           node lighthouse.js http://localhost:5173 lighthouse_desktop.json desktop
         
-      - name: Upload Lighthouse Report
+      - name: Upload Lighthouse Desktop Desktop
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
         with:
           name: lighthouse-report
           path: lighthouse/desktop.report.html
 
-      - name: Mobile Lighthouse Test
+      - name: Run Lighthouse Mobile
         run: |
           cd lighthouse
-          which bc
-          chmod +x check_performance.sh
-          xvfb-run --auto-servernum --server-args='-screen 0 1280x1024x24' ./check_performance.sh  http://localhost:5173 lighthouse_mobile.json mobile
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        shell: bash
+          node lighthouse.js http://localhost:5173 lighthouse_mobile.json mobile
 
-      - name: Upload Lighthouse Report
+      - name: Upload Lighthouse Mobile Report
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
         with:
