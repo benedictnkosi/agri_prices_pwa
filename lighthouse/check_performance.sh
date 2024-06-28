@@ -5,7 +5,7 @@ CONFIG_PATH=$2
 TEST_TYPE=$3
 
 # Run Lighthouse CLI with custom configuration
-lighthouse "$URL" --config-path="$CONFIG_PATH" --output json --output html --output-path ./$TEST_TYPE
+npx lighthouse "$URL" --config-path="$CONFIG_PATH" --output json --output html --output-path ./$TEST_TYPE
 
 # Extract the performance score using jq
 performance_score=$(jq -r '.categories.performance.score' $TEST_TYPE.report.json)
