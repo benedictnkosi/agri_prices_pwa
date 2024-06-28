@@ -1,0 +1,87 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - name: get gh token from my-gh-app
+        id: gh-app-auth
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          repositories: digital-ticketing-portal-infra
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Package Files
+        run: cd dist && zip -r "../ticketing-pwa-${{ github.event.pull_request.number }}.zip" *
+
+      - name: Make pwa release
+        if: github.event_name == 'push'
+        run: cp "ticketing-pwa-${{ github.event.pull_request.number }}.zip" ticketing-pwa.zip
+
+      - name: Upload Artifact for main Push
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ticketing-pwa-release-${{ github.event.pull_request.number }}
+          path: "ticketing-pwa-${{ github.event.pull_request.number }}.zip"
+          retention-days: 30
+          overwrite: true
+
+      - name: Generate release tag
+        if: github.event_name == 'push'
+        id: generate_release_tag
+        uses: amitsingh-007/next-release-tag@v5.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tag_prefix: "v"
+          tag_template: "yyyy.mm.dd.i"
+
+      - name: Update Latest Artifact
+        if: github.event_name == 'push'
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.generate_release_tag.outputs.next_release_tag }}
+          artifacts: "ticketing-pwa.zip"
+
+      - name: Upload Artifact for Pull Request
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ticketing-pwa-${{ github.event.pull_request.number }}
+          path: "ticketing-pwa-${{ github.event.pull_request.number }}.zip"
+          retention-days: 1
+          overwrite: true
+
+      - name: Trigger infra pipeline to deploy
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ steps.gh-app-auth.outputs.token }}
+          repository: MerlinEntertainments/digital-ticketing-portal-infra
+          event-type: deployment
+          client-payload: '{"ref": "refs/heads/main", "trigger": "tickting-pwa", "artifact_name": "ticketing-pwa-${{ github.event.pull_request.number }}", "run_id": "${{ github.run_id}}"}'
