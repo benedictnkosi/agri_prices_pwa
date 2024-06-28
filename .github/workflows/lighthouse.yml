@@ -34,7 +34,9 @@ jobs:
           curl --retry 5 --retry-delay 10 --retry-connrefused http://localhost:5173
 
       - name: Run Lighthouse Script
-        run: node lighthouse.js http://localhost:5173 lighthouse_desktop.json desktop
+        run: |
+          cd lighthouse
+          node lighthouse.js http://localhost:5173 lighthouse_desktop.json desktop
         
       - name: Upload Lighthouse Report
         if: ${{ always() }}
