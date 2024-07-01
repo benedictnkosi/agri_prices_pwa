@@ -1,0 +1,43 @@
+name: Cypress Tests
+
+on:
+  push:
+    branches: ["cypress"]
+  pull_request:
+    branches: ["cypress"]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    env:
+      FUNCTIONS_WORKER_RUNTIME: "node"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: install dependencies
+        run: npm install
+
+      - name: Start App
+        run: |
+          nohup npm run start & # Run the app in the background
+          sleep 30 # Wait for a while to ensure the app starts
+          curl --retry 5 --retry-delay 10 --retry-connrefused http://localhost:5173
+
+      - name: Run Cypress tests
+        run: npm run cypress:run
+
+      - name: Upload Cypress screenshots
+        if: always() # Ensure this step runs even if the previous step fails
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
+      - name: Upload Cypress videos
+        if: always() # Ensure this step runs even if the previous step fails
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-videos
+          path: cypress/videos
