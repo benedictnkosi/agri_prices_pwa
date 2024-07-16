@@ -9,6 +9,8 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       FUNCTIONS_WORKER_RUNTIME: "node"
 
