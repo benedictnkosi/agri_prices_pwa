@@ -19,7 +19,17 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "types": ["cypress"]
+    "types": ["cypress"],
+
+    "paths": {
+      "@merlin-ui-kit/assets": ["./node_modules/merlin-ui-kit/dist/assets"],
+      "@merlin-ui-kit/components": [
+        "./node_modules/merlin-ui-kit/dist/components"
+      ],
+      "@merlin-ui-kit/components/*": [
+        "./node_modules/merlin-ui-kit/dist/components/*"
+      ]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
