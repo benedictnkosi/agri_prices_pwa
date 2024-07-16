@@ -31,9 +31,11 @@ jobs:
         with:
           app-id: ${{ secrets.GH_APP_ID }}
           private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
-          repositories: digital-ticketing-portal-infra
+          repositories: common-merlin-ui-kit,digital-ticketing-portal-infra
 
-      - run: npm ci
+      - run: |
+          git config --global url."https://oauth2:${{ steps.gh-app-auth.outputs.token }}@github.com".insteadOf ssh://git@github.com
+          npm ci
 
       - run: npm run build
 
