@@ -9,7 +9,6 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      injectRegister: false,
 
       manifest: {
         name: "Plan A Visit",
@@ -18,21 +17,6 @@ export default defineConfig({
         theme_color: "#ffffff",
 
         icons: [
-          {
-            src: "pwa-64x64.png",
-            sizes: "64x64",
-            type: "image/png",
-          },
-          {
-            src: "pwa-192x192.png",
-            sizes: "192x192",
-            type: "image/png",
-          },
-          {
-            src: "pwa-512x512.png",
-            sizes: "512x512",
-            type: "image/png",
-          },
           {
             src: "maskable-icon-512x512.png",
             sizes: "512x512",
@@ -49,12 +33,17 @@ export default defineConfig({
       },
 
       devOptions: {
-        enabled: false,
-        navigateFallback: "index.html",
-        suppressWarnings: true,
-        type: "module",
+        enabled: true,
       },
     }),
     mockServer(),
   ],
+  resolve: {
+    alias: {
+      "@merlin-ui-kit": "merlin-ui-kit/dist",
+    },
+  },
+  preview: {
+    port: 5173,
+  },
 });

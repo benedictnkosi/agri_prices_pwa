@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Product } from "../../models/Product";
-import axios from "axios";
 import styles from "./ProductList.module.scss";
+import { Alert } from "@merlin-ui-kit/components/Alert/Alert";
+import LoadingSpinner from "@merlin-ui-kit/components/Icons/LoadingSpinner";
+import { useProducts } from "../../hooks/useProducts";
 
 interface ProductListItemProps {
   product: Product;
   isSelected: boolean;
   onSelect: (productId: string) => void;
 }
-
-const apiUrl = import.meta.env.VITE_PRODUCTS_API_URL
-console.log("API URL:", apiUrl);
 
 const ProductListItem = ({
   product,
@@ -35,7 +34,10 @@ const ProductListItem = ({
         <div className={styles["column"]}>
           <div className={styles["price"]}>
             <span className={styles["row"]}>From</span>
-            <span className={styles["value"]}>{product.currencySymbol}{product.price}.00</span>
+            <span className={styles["value"]}>
+              {product.currencySymbol}
+              {product.price}.00
+            </span>
           </div>
         </div>
         <button
@@ -50,7 +52,7 @@ const ProductListItem = ({
 };
 
 export const ProductList = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const { products, loading, error } = useProducts();
   const [selectedProductId, setSelectedProductId] = useState<string>("");
   console.log(selectedProductId);
 
@@ -59,30 +61,31 @@ export const ProductList = () => {
     setSelectedProductId(productId);
   };
 
-  useEffect(() => {
-    axios
-      .get(apiUrl)
-      .then((response) => {
-        setProducts(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data: ", error);
-      });
-  }, []);
-
   return (
-    <div className={styles["product-list"]}>
-      <section className={styles["list-wrapper"]}>
-        <ul>
-          {products.map((product) => (
-            <ProductListItem
-              product={product}
-              isSelected={product?.id === selectedProductId}
-              onSelect={onSelect}
-            />
-          ))}
-        </ul>
-      </section>
-    </div>
+    <>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <Alert variant="danger" show={!!error}>
+            {error}
+          </Alert>
+          <div className={styles["product-list"]}>
+            <section className={styles["list-wrapper"]}>
+              <ul>
+                {products.map((product) => (
+                  <ProductListItem
+                    key={product?.id}
+                    product={product}
+                    isSelected={product?.id === selectedProductId}
+                    onSelect={onSelect}
+                  />
+                ))}
+              </ul>
+            </section>
+          </div>
+        </>
+      )}
+    </>
   );
 };
