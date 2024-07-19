@@ -1,14 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { ProductList } from "./components/ProductList/ProductList";
 import "./index.scss";
 import Layout from "./layout";
+import { Booking } from "./components/Booking";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <ProductList></ProductList>,
+    element: <Booking></Booking>,
   },
 ]);
 

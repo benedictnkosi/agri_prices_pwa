@@ -11,12 +11,48 @@ export default (): MockHandler[] => [
           description:
             "Entry to Sea life Brighton aquarium with entrance at a chosen 10 minutes time slot",
           price: 25,
+          currencySymbol: "£",
+          customerTypes: [
+            {
+              id: 1162,
+              name: "Adult (15+ Years)",
+              price: 25,
+            },
+            {
+              id: 1163,
+              name: "Child (3-14 Years)",
+              price: 22,
+            },
+            {
+              id: 232,
+              name: "Under 3",
+              price: 0,
+            },
+            {
+              id: 247,
+              name: "Carer",
+              price: 0,
+            },
+          ],
         },
         {
           id: "id2",
           name: "test product two",
           description: "lorem ipsum",
           price: 32,
+          currencySymbol: "£",
+          customerTypes: [
+            {
+              id: 1162,
+              name: "Adult (17+ Years)",
+              price: 25,
+            },
+            {
+              id: 1163,
+              name: "Child (2-17 Years)",
+              price: 22,
+            },
+          ],
         },
       ];
       res.setHeader("Content-Type", "application/json");
