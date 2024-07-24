@@ -41,7 +41,7 @@ export const useAvailability = (productId: string) => {
     axios
       .get(`${availabilityUrl}/${productId}`)
       .then((response) => {
-        if (response.data?.length === 0) {
+        if (response.data?.dates?.length === 0) {
           setError("No timeslots found. Please try again.");
         } else {
           setTimeslots(parseTimeSlots(response.data?.dates));

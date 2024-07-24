@@ -54,9 +54,72 @@ export default (): MockHandler[] => [
             },
           ],
         },
+        {
+          id: "notimeslots",
+          name: "No timeslots found",
+          description: "lorem ipsum",
+          price: 32,
+          currencySymbol: "£",
+          customerTypes: [
+            {
+              id: 1162,
+              name: "Adult (17+ Years)",
+              price: 25,
+            },
+            {
+              id: 1163,
+              name: "Child (2-17 Years)",
+              price: 22,
+            },
+          ],
+        },
+        {
+          id: "error",
+          name: "Error for timeslots",
+          description: "lorem ipsum",
+          price: 32,
+          currencySymbol: "£",
+          customerTypes: [
+            {
+              id: 1162,
+              name: "Adult (17+ Years)",
+              price: 25,
+            },
+            {
+              id: 1163,
+              name: "Child (2-17 Years)",
+              price: 22,
+            },
+          ],
+        },
       ];
       res.setHeader("Content-Type", "application/json");
       res.setHeader("Access-Control-Allow-Origin", "*");
+      res.end(JSON.stringify(data));
+    },
+  },
+  {
+    pattern: "/api/availability/notimeslots",
+    handle: (req, res) => {
+      const data = {
+        productId: 600000676,
+        dates: [],
+      };
+      res.setHeader("Content-Type", "application/json");
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.end(JSON.stringify(data));
+    },
+  },
+  {
+    pattern: "/api/availability/error",
+    handle: (req, res) => {
+      const data = {
+        productId: 600000676,
+        dates: [],
+      };
+      res.setHeader("Content-Type", "application/json");
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.statusCode = 500;
       res.end(JSON.stringify(data));
     },
   },
