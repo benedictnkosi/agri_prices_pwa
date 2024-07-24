@@ -2,7 +2,7 @@ describe("get products", () => {
   it("all products are displayed", () => {
     cy.request("/api/products").then((response) => {
       const products = response.body;
-      expect(products.length).to.eq(2);
+      expect(products.length).to.eq(4);
 
       //check that the productts are on the page
       cy.visit("/");
