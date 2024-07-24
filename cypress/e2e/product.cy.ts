@@ -33,4 +33,36 @@ describe("get products", () => {
       expect(className).to.contain("_selected");
     });
   });
+
+  it("should display the correct customer types", () => {
+    cy.request("/api/products").then((response) => {
+      const products = response.body;
+
+      //check that the customer types are on the page
+      cy.visit("/");
+      cy.get("button").eq(0).contains("Select").click();
+      cy.get('div[class*="col-md-8"]')
+        .contains(products[0].customerTypes[0].name)
+        .should("be.visible");
+      cy.get('div[class*="col-md-8"]')
+        .contains(products[0].customerTypes[1].name)
+        .should("be.visible");
+      cy.get('div[class*="col-md-8"]')
+        .contains(products[0].customerTypes[2].name)
+        .should("be.visible");
+      cy.get('div[class*="col-md-8"]')
+        .contains(products[0].customerTypes[3].name)
+        .should("be.visible");
+
+      //select the second product and check that the customer types are on the page
+      cy.get("button").eq(0).contains("Select").click();
+      cy.get("button").eq(0).contains("Select").click();
+      cy.get('div[class*="col-md-8"]')
+        .contains(products[0].customerTypes[0].name)
+        .should("be.visible");
+      cy.get('div[class*="col-md-8"]')
+        .contains(products[0].customerTypes[1].name)
+        .should("be.visible");
+    });
+  });
 });
