@@ -5,6 +5,7 @@ import { Product } from "../models/Product";
 import LoadingSpinner from "@merlin-ui-kit/components/Icons/LoadingSpinner";
 import { Alert } from "@merlin-ui-kit/components/Alert/Alert";
 import CustomerTypeSelector from "./CustomerTypeSelector/CustomerTypeSelector";
+import AvailabilityCalendar from "./AvailabilityCalendar/AvailabilityCalendar";
 
 export const Booking = () => {
   const { products, loading, error } = useProducts();
@@ -22,15 +23,25 @@ export const Booking = () => {
         <LoadingSpinner />
       ) : (
         <>
-          <Alert variant="danger" show={!!error}>
-            {error}
-          </Alert>
-          <ProductList products={products} onSelect={onSelect} />
-          {selectedProduct && (
-            <CustomerTypeSelector
-              key={selectedProduct.id}
-              customerTypes={selectedProduct.customerTypes}
-            ></CustomerTypeSelector>
+          {error ? (
+            <Alert variant="danger" show={!!error}>
+              {error}
+            </Alert>
+          ) : (
+            <>
+              <ProductList products={products} onSelect={onSelect} />
+              {selectedProduct && (
+                <div key={selectedProduct.id}>
+                  <CustomerTypeSelector
+                    customerTypes={selectedProduct.customerTypes}
+                  ></CustomerTypeSelector>
+                  <AvailabilityCalendar
+                    productId={selectedProduct.id}
+                    currency={selectedProduct.currencySymbol}
+                  ></AvailabilityCalendar>
+                </div>
+              )}
+            </>
           )}
         </>
       )}

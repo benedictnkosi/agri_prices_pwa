@@ -60,4 +60,24 @@ export default (): MockHandler[] => [
       res.end(JSON.stringify(data));
     },
   },
+  {
+    pattern: "/api/availability/*",
+    handle: (req, res) => {
+      const data = {
+        productId: 600000676,
+        dates: [
+          { date: "2024-07-19T16:00", price: 25 },
+          { date: "2024-07-19T16:20", price: 25 },
+          { date: "2024-07-19T16:40", price: 25 },
+          { date: "2024-07-19T17:00", price: 25 },
+          { date: "2024-07-19T17:20", price: 25 },
+          { date: "2024-07-19T17:40", price: 25 },
+          { date: "2024-07-19T18:00", price: 25 },
+        ],
+      };
+      res.setHeader("Content-Type", "application/json");
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.end(JSON.stringify(data));
+    },
+  },
 ];
