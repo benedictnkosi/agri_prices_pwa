@@ -1,3 +1,5 @@
+import { Server } from 'mock-socket';
+
 describe("get products", () => {
   it("all products are displayed", () => {
     cy.request("/api/products").then((response) => {
@@ -5,7 +7,7 @@ describe("get products", () => {
       expect(products.length).to.eq(4);
 
       //check that the productts are on the page
-      cy.visit("/");
+      cy.lauchApp();
       products.forEach((product) => {
         cy.get('span[class*="_title"]').contains(product.name).should("exist");
 
@@ -19,7 +21,7 @@ describe("get products", () => {
   });
 
   it("The select button works", () => {
-    cy.visit("/");
+    cy.lauchApp();
     cy.get("button").eq(0).contains("Select").click();
     cy.get('li[class*="_selected"]').should("have.length", 1);
 
@@ -39,7 +41,7 @@ describe("get products", () => {
       const products = response.body;
 
       //check that the customer types are on the page
-      cy.visit("/");
+      cy.lauchApp();
       cy.get("button").eq(0).contains("Select").click();
       cy.get('div[class*="col-md-8"]')
         .contains(products[0].customerTypes[0].name)

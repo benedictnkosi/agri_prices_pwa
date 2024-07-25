@@ -16,5 +16,6 @@ export default defineConfig({
 
       return config;
     },
+    pageLoadTimeout: 10000,
   },
 });

@@ -1,3 +1,4 @@
+
 describe("get availability", () => {
   it("Should display available timeslots for a product", () => {
     const expectedTimeslots = [
@@ -10,7 +11,8 @@ describe("get availability", () => {
       { time: "18:00", price: "£25.00" }
     ];
 
-    cy.visit("/");
+    cy.lauchApp();
+   
     cy.contains("span", "test product two") 
       .closest("li") 
       .find("button")
@@ -29,7 +31,7 @@ describe("get availability", () => {
   });
 
   it("Should display message when there are no timeslots", () => {
-    cy.visit("/");
+    cy.lauchApp();
     cy.contains("span", "No timeslots found") // Find the span with the specific text
       .closest("li") // Find the closest ancestor li element
       .find("button") // Find the button within this li
@@ -38,7 +40,7 @@ describe("get availability", () => {
   });
 
   it("Should display message when there is an error getting timeslots", () => {
-    cy.visit("/");
+    cy.lauchApp();
     cy.contains("span", "Error for timeslots") // Find the span with the specific text
       .closest("li") // Find the closest ancestor li element
       .find("button") // Find the button within this li
