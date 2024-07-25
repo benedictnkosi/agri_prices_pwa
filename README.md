@@ -34,3 +34,4 @@ export default {
 - Generate a private github token with atleast read access in your github profile and save it somewhere safe like 1Password
 - run command `git config --global url."https://<GITHUB_TOKEN>@github.com/".insteadOf git@github.com:`
 - now run `npm i` and it should pull in `merlin-ui-kit` dependency without any issues
+- make sure you have environemnt variable VITE_API_URL=http://localhost:5173/api

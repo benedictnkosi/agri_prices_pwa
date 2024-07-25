@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Product } from "../models/Product";
 import axios from "axios";
 
-const apiUrl = import.meta.env.VITE_PRODUCTS_API_URL;
+const apiUrl = import.meta.env.VITE_API_URL;
+const productsUrl = `${apiUrl}/products`;
 
 export const useProducts = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -13,7 +14,7 @@ export const useProducts = () => {
     setLoading(false);
     setError(null);
     axios
-      .get(apiUrl)
+      .get(productsUrl)
       .then((response) => {
         if (response.data?.length === 0) {
           setError("No products found. Please try again.");

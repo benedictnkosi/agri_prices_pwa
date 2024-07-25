@@ -13,7 +13,8 @@
       display: flex;
 
       .container {
-        border: 1px solid #ccc;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        padding: 2px;
         border-radius: 6px;
         margin: 20px;
         width: 280px;
@@ -22,6 +23,7 @@
         justify-content: space-between;
 
         &.selected {
+          padding: 0px;
           border: 3px solid;
         }
 
@@ -38,9 +40,11 @@
         .footer {
           display: flex;
           justify-content: space-between;
-          border-top: 1px solid #ccc;
+          border-top: 1px solid rgba(255, 255, 255, 0.25);
+          padding-top: 2px;
 
           &.selected {
+            padding-top: 0px;
             border-top: 3px solid;
           }
         }

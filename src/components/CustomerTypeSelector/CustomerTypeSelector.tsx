@@ -27,7 +27,7 @@ const CustomerTypeSelector: React.FC<CustomerTypeSelectorProps> = ({
   };
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 pb-4">
       <div className={styles["section-header"]}>
         How many tickets do you need?
       </div>
