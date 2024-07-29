@@ -3,10 +3,10 @@ name: Lighthouse CI
 on:
   push:
     branches:
-      - cypress
+      - main
   pull_request:
     branches:
-      - cypress
+      - main
 
 jobs:
   lighthouse:
