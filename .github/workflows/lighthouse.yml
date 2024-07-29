@@ -16,10 +16,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
-          node-version: "18"
+          node-version: 20.x
+          cache: "npm"
 
       - name: get gh token from my-gh-app
         id: gh-app-auth
