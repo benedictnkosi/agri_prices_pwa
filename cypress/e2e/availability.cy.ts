@@ -23,7 +23,7 @@ describe("get availability", () => {
       const expectedTime = expectedTimeslots[index].time;
       const expectedPrice = expectedTimeslots[index].price;
 
-      // Verify the time
+      // Verify the time, comment to check the pipeline
       cy.wrap($el).find("div:first").should("have.text", expectedTime);
       // Verify the price
       cy.wrap($el).find("._price_srgut_28").should("have.text", expectedPrice);
