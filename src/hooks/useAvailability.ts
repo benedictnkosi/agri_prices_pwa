@@ -56,7 +56,7 @@ export const useAvailability = (productId: string) => {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [productId]);
 
   return {
     timeSlots,

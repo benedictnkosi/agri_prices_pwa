@@ -37,7 +37,8 @@ jobs:
           git config --global url."https://oauth2:${{ steps.gh-app-auth.outputs.token }}@github.com".insteadOf ssh://git@github.com
           npm ci
 
-      - run: npm run build
+      - name: Run ESLint
+        run: npm run eslint
 
       - name: Package Files
         run: cd dist && zip -r "../ticketing-pwa-${{ github.event.pull_request.number }}.zip" *
