@@ -40,6 +40,8 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
+      - run: npm run build
+
       - name: Package Files
         run: cd dist && zip -r "../ticketing-pwa-${{ github.event.pull_request.number }}.zip" *
 
