@@ -36,18 +36,12 @@
 //   }
 // }
 
-declare namespace Cypress {
-    interface Chainable<Subject = any> {
-        lauchApp(): Chainable<void>;
-    }
-  }
-
-Cypress.Commands.add('lauchApp', () => {
-    cy.visit('/', {
-      onBeforeLoad: (win) => {
-        cy.stub(win, 'WebSocket').callsFake((url) => {
-          return new WebSocket(url); // mock socket
-        });
-      }
-    });
+Cypress.Commands.add("lauchApp", () => {
+  cy.visit("/", {
+    onBeforeLoad: (win) => {
+      cy.stub(win, "WebSocket").callsFake((url) => {
+        return new WebSocket(url); // mock socket
+      });
+    },
   });
+});

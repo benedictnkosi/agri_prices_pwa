@@ -37,6 +37,9 @@ jobs:
           git config --global url."https://oauth2:${{ steps.gh-app-auth.outputs.token }}@github.com".insteadOf ssh://git@github.com
           npm ci
 
+      - name: Run ESLint
+        run: npm run lint
+
       - run: npm run build
 
       - name: Package Files

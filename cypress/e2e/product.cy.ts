@@ -1,5 +1,3 @@
-import { Server } from 'mock-socket';
-
 describe("get products", () => {
   it("all products are displayed", () => {
     cy.request("/api/products").then((response) => {
@@ -25,15 +23,21 @@ describe("get products", () => {
     cy.get("button").eq(0).contains("Select").click();
     cy.get('li[class*="_selected"]').should("have.length", 1);
 
-    cy.get('li[class*="_container"]').eq(0).invoke('attr', 'class').then((className) => {
-      expect(className).to.contain("_selected");
-    });
+    cy.get('li[class*="_container"]')
+      .eq(0)
+      .invoke("attr", "class")
+      .then((className) => {
+        expect(className).to.contain("_selected");
+      });
 
     cy.get("button").eq(1).contains("Select").click();
     cy.get('li[class*="_selected"]').should("have.length", 1);
-    cy.get('li[class*="_container"]').eq(1).invoke('attr', 'class').then((className) => {
-      expect(className).to.contain("_selected");
-    });
+    cy.get('li[class*="_container"]')
+      .eq(1)
+      .invoke("attr", "class")
+      .then((className) => {
+        expect(className).to.contain("_selected");
+      });
   });
 
   it("should display the correct customer types", () => {
