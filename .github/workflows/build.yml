@@ -49,21 +49,12 @@ jobs:
         if: github.event_name == 'push'
         run: cp "ticketing-pwa-${{ github.event.pull_request.number }}.zip" ticketing-pwa.zip
 
-      - name: Upload Artifact for main Push
-        if: github.event_name == 'push'
-        uses: actions/upload-artifact@v4
-        with:
-          name: ticketing-pwa-release-${{ github.event.pull_request.number }}
-          path: "ticketing-pwa-${{ github.event.pull_request.number }}.zip"
-          retention-days: 30
-          overwrite: true
-
       - name: Upload Artifact for Pull Request
         if: github.event_name == 'pull_request'
         id: pull_request_artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ticketing-pwa-pr-${{ github.event.pull_request.number }}
+          name: ticketing-pwa
           path: "ticketing-pwa-${{ github.event.pull_request.number }}.zip"
           retention-days: 1
           overwrite: true
