@@ -84,15 +84,6 @@ jobs:
           tag: ${{ steps.generate_release_tag.outputs.next_release_tag }}
           artifacts: "ticketing-pwa.zip"
 
-      - name: Upload Artifact for Pull Request
-        if: github.event_name == 'pull_request'
-        uses: actions/upload-artifact@v4
-        with:
-          name: ticketing-pwa-${{ github.event.pull_request.number }}
-          path: "ticketing-pwa-${{ github.event.pull_request.number }}.zip"
-          retention-days: 1
-          overwrite: true
-
       - name: Trigger infra pipeline to deploy latest release
         if: github.event_name == 'push'
         uses: peter-evans/repository-dispatch@v3
