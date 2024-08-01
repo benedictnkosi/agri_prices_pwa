@@ -46,7 +46,6 @@ jobs:
         run: cd dist && zip -r "../ticketing-pwa-${{ github.event.pull_request.number }}.zip" *
 
       - name: Make pwa release
-        if: github.event_name == 'push'
         run: cp "ticketing-pwa-${{ github.event.pull_request.number }}.zip" ticketing-pwa.zip
 
       - name: Upload Artifact for Pull Request
@@ -55,7 +54,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ticketing-pwa
-          path: "ticketing-pwa-${{ github.event.pull_request.number }}.zip"
+          path: "ticketing-pwa.zip"
           retention-days: 1
           overwrite: true
 
