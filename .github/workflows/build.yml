@@ -58,6 +58,16 @@ jobs:
           retention-days: 30
           overwrite: true
 
+      - name: Upload Artifact for Pull Request
+        if: github.event_name == 'pull_request'
+        id: pull_request_artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ticketing-pwa-pr-${{ github.event.pull_request.number }}
+          path: "ticketing-pwa-${{ github.event.pull_request.number }}.zip"
+          retention-days: 1
+          overwrite: true
+
       - name: Generate release tag
         if: github.event_name == 'push'
         id: generate_release_tag
@@ -83,10 +93,19 @@ jobs:
           retention-days: 1
           overwrite: true
 
-      - name: Trigger infra pipeline to deploy
+      - name: Trigger infra pipeline to deploy latest release
+        if: github.event_name == 'push'
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ steps.gh-app-auth.outputs.token }}
           repository: MerlinEntertainments/digital-ticketing-portal-infra
           event-type: deployment
-          client-payload: '{"ref": "refs/heads/main", "trigger": "tickting-pwa", "artifact_name": "ticketing-pwa-${{ github.event.pull_request.number }}", "run_id": "${{ github.run_id}}"}'
+
+      - name: Trigger infra pipeline to deploy PR to dev
+        if: github.event_name == 'pull_request'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ steps.gh-app-auth.outputs.token }}
+          repository: MerlinEntertainments/digital-ticketing-portal-infra
+          event-type: pr-deployment
+          client-payload: '{"artifactId": "${{ steps.pull_request_artifact.outputs.artifact-id }}", "pr_number": "${{ github.event.pull_request.number }}"}'
