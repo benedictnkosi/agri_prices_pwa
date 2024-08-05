@@ -36,5 +36,3 @@ export default {
 - now run `npm i` and it should pull in `merlin-ui-kit` dependency without any issues
 - make sure you have environemnt variable VITE_API_URL=http://localhost:5173/api
 
-#update to check the deployment
-
