@@ -90,3 +90,16 @@ jobs:
           repository: MerlinEntertainments/digital-ticketing-portal-infra
           event-type: pr-deployment
           client-payload: '{"artifactId": "${{ steps.pull_request_artifact.outputs.artifact-id }}", "pr_number": "${{ github.event.pull_request.number }}"}'
+
+  Cypress-tests:
+    uses: ./.github/workflows/test-app.yml
+    secrets: inherit
+    permissions:
+      contents: write
+
+
+  Lighthouse-tests:
+    uses: ./.github/workflows/lighthouse.yml
+    secrets: inherit
+    permissions:
+      contents: write
