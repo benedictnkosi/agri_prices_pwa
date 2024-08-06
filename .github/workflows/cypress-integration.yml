@@ -1,8 +1,11 @@
-name: Cypress Tests
+name: Cypress Integration Tests
 
 on:
-  push:
   workflow_call:
+    inputs:
+      HOSTNAME:
+        type: string
+        required: true
 
 jobs:
   cypress-run:
@@ -40,12 +43,12 @@ jobs:
         run: |
           nohup npm run start:test & # Run the app in the background
           sleep 30 # Wait for a while to ensure the app starts
-            curl --retry 5 --retry-delay 10 --retry-connrefused http://localhost:5173
+          curl --retry 5 --retry-delay 10 --retry-connrefused ${{ inputs.HOSTNAME }}
 
       - name: Run Cypress tests
         run: npm run cypress:run
         env:
-          HOSTNAME: "http://localhost:5173"
+          BASEURL: ${{ inputs.HOSTNAME }}
 
       - name: Upload Cypress screenshots
         if: always() # Ensure this step runs even if the previous step fails

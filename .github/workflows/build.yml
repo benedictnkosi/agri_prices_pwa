@@ -90,3 +90,30 @@ jobs:
           repository: MerlinEntertainments/digital-ticketing-portal-infra
           event-type: pr-deployment
           client-payload: '{"artifactId": "${{ steps.pull_request_artifact.outputs.artifact-id }}", "pr_number": "${{ github.event.pull_request.number }}"}'
+
+  Cypress-tests:
+    uses: ./.github/workflows/test-app.yml
+    secrets: inherit
+    permissions:
+      contents: write
+
+
+  Integration-Tests-SIT:
+    needs: [build]
+    if: github.event_name == 'push'
+    uses: ./.github/workflows/cypress-integration.yml
+    with:
+      HOSTNAME: "https://dfe-ticketing-portal-sit-euw-000-gug5b8bgdyhwhhev.a01.azurefd.net"
+    secrets: inherit
+    permissions:
+      contents: write
+
+  Integration-Tests-DEV:
+    needs: [build]
+    if: github.event_name == 'pull'
+    uses: ./.github/workflows/cypress-integration.yml
+    with:
+      HOSTNAME: "https://ssticketingpwapr${{ github.event.pull_request.number }}00.z6.web.core.windows.net"
+    secrets: inherit
+    permissions:
+      contents: write
