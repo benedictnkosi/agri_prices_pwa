@@ -1,6 +1,7 @@
 
 describe("get availability", () => {
   const apiUrl = `https://func-ticketing-sit-euw-000.azurewebsites.net`;
+  //const apiUrl = `http://localhost:5173`;
   console.log(apiUrl);
 
   it("Should display available timeslots for a product @integration", () => {

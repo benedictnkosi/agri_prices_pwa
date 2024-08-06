@@ -49,8 +49,8 @@ const AvailabilityCalendar: React.FC<AvailabilityCalendarProps> = ({
                       }`}
                       onClick={() => handleTimeSelect(slot.time)}
                     >
-                      <div>{slot.time}</div>
-                      <div className={styles["price"]}>
+                      <div cy-tag="time-slot-time">{slot.time}</div>
+                      <div cy-tag="time-slot-price" className={styles["price"]}>
                         {currency}
                         {slot.price}.00
                       </div>

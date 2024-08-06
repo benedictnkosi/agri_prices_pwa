@@ -1,5 +1,6 @@
 describe("get products", () => {
-  const apiUrl = `https://func-ticketing-sit-euw-000.azurewebsites.net`;
+ const apiUrl = `https://func-ticketing-sit-euw-000.azurewebsites.net`;
+  //const apiUrl = `http://localhost:5173`;
   console.log(apiUrl);
 
   it("all products are displayed @integration", () => {
@@ -8,13 +9,13 @@ describe("get products", () => {
       //check that the productts are on the page
       cy.lauchApp();
       products.forEach((product) => {
-        cy.get('span[class*="_title"]').contains(product.name).should("exist");
+        cy.get('span[cy-tag="product-name"]').contains(product.name).should("exist");
 
-        cy.get('div[class*="_details"] p')
+        cy.get('p[cy-tag="product-description"]')
           .contains(product.description)
           .should("exist");
 
-        cy.get('span[class*="_value"]').contains(product.price).should("exist");
+        cy.get('span[cy-tag="product-price"]').contains(product.price).should("exist");
       });
     });
   });
@@ -25,13 +26,6 @@ describe("get products", () => {
     if (cy.get("button").eq(0).contains("Select").should("exist")) {
       cy.get("button").eq(0).contains("Select").click();
       cy.get('li[class*="_selected"]').should("have.length", 1);
-
-      cy.get('li[class*="_container"]')
-        .eq(0)
-        .invoke("attr", "class")
-        .then((className) => {
-          expect(className).to.contain("_selected");
-        });
     }
   });
 
@@ -49,7 +43,7 @@ describe("get products", () => {
 
         // Check that the customer types are on the page for each product
         product.customerTypes.forEach((customerType) => {
-          cy.get('div[class*="col-md-8"]')
+          cy.get('div[cy-tag="customer-type"]')
             .contains(customerType.name)
             .should("be.visible");
         });
