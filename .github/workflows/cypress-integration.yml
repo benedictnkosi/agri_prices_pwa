@@ -35,6 +35,13 @@ jobs:
           private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
           repositories: common-merlin-ui-kit,digital-ticketing-portal-infra
 
+      - run: |
+          git config --global url."https://oauth2:${{ steps.gh-app-auth.outputs.token }}@github.com".insteadOf ssh://git@github.com
+          npm ci
+
+      - name: npm install
+        run: npm install
+
           # Compile TypeScript to JavaScript
       - name: Compile TypeScript
         run: tsc cypress/support/PWAHealthCheck.ts
@@ -44,10 +51,6 @@ jobs:
         env:
           HOST: ${{ inputs.HOSTNAME }}
           FUNCTIONS_WORKER_RUNTIME: node
-
-      - run: |
-          git config --global url."https://oauth2:${{ steps.gh-app-auth.outputs.token }}@github.com".insteadOf ssh://git@github.com
-          npm ci
 
       - name: Run Cypress tests
         run: npx cypress run --env grep=@integration
