@@ -40,7 +40,7 @@ jobs:
           npm ci
 
       - name: WPA Health Check
-          run: curl --retry 60 --retry-delay 10 --retry-connrefused ${{ inputs.HOSTNAME }}
+        run: curl --retry 60 --retry-delay 10 --retry-connrefused ${{ inputs.HOSTNAME }}
 
       - name: SIT Services Health Check
         run: curl --retry 60 --retry-delay 10 --retry-connrefused https://func-ticketing-sit-euw-000.azurewebsites.net
