@@ -98,8 +98,22 @@ jobs:
       contents: write
 
 
-  Lighthouse-tests:
-    uses: ./.github/workflows/lighthouse.yml
+  Integration-Tests-SIT:
+    needs: [publish]
+    if: github.event_name == 'push'
+    uses: ./.github/workflows/cypress-integration.yml
+    with:
+      HOSTNAME: "https://dfe-ticketing-portal-sit-euw-000-gug5b8bgdyhwhhev.a01.azurefd.net"
+    secrets: inherit
+    permissions:
+      contents: write
+
+  Integration-Tests-DEV:
+    needs: [publish]
+    if: github.event_name == 'pull'
+    uses: ./.github/workflows/cypress-integration.yml
+    with:
+      HOSTNAME: "https://ssticketingpwapr${{ github.event.pull_request.number }}00.z6.web.core.windows.net"
     secrets: inherit
     permissions:
       contents: write
