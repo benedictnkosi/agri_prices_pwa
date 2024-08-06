@@ -39,6 +39,14 @@ jobs:
           git config --global url."https://oauth2:${{ steps.gh-app-auth.outputs.token }}@github.com".insteadOf ssh://git@github.com
           npm ci
 
+      - name: WPA Health Check
+          run: |
+            curl --retry 60 --retry-delay 10 --retry-connrefused ${{ inputs.HOSTNAME }}
+
+      - name: SIT Services Health Check
+        run: |
+          curl --retry 60 --retry-delay 10 --retry-connrefused https://func-ticketing-sit-euw-000.azurewebsites.net
+
       - name: Run Cypress tests
         run: npx cypress run --env grep=@integration
         env:

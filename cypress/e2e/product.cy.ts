@@ -3,11 +3,6 @@ describe("get products", () => {
   const apiUrl = Cypress.env('API_URL');
   console.log(apiUrl); 
 
-  before(() => {
-    // Check the health of the PWA
-    cy.checkPWAHealth();
-  });
-
   it("all products are displayed @integration", () => {
     cy.request(`${apiUrl}/api/products`).then((response) => {
       const products = response.body;
