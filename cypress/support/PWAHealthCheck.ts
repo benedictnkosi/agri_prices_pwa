@@ -57,14 +57,18 @@ async function runHealthCheckAfterShutdown() {
   await checkHealth('https://func-ticketing-sit-euw-000.azurewebsites.net/api/products', 120, 5000);
 }
 
-if (host.includes('sit')) {
-  runHealthCheckAfterShutdown().catch(error => {
-    console.error('An unexpected error occurred during shutdown:', error);
-    process.exit(1);
-  });
-} else {
-  checkHealth(host, 120, 5000).catch(error => {
-    console.error('An unexpected error occurred:', error);
-    process.exit(1);
-  });
+export const checkPWAHealth = async () => {
+  if (host.includes('sit')) {
+    runHealthCheckAfterShutdown().catch(error => {
+      console.error('An unexpected error occurred during shutdown:', error);
+      process.exit(1);
+    });
+  } else {
+    checkHealth(host, 120, 5000).catch(error => {
+      console.error('An unexpected error occurred:', error);
+      process.exit(1);
+    });
+  }
 }
+
+

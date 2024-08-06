@@ -1,6 +1,13 @@
+import { checkPWAHealth } from "../support/PWAHealthCheck";
+
 describe("get products", () => {
   const apiUrl = Cypress.env('API_URL');
   console.log(apiUrl); 
+
+  before(() => {
+    // Check the health of the PWA
+    checkPWAHealth();
+  });
 
   it("all products are displayed @integration", () => {
     cy.request(`${apiUrl}/api/products`).then((response) => {
