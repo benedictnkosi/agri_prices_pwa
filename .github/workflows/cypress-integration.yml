@@ -35,15 +35,19 @@ jobs:
           private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
           repositories: common-merlin-ui-kit,digital-ticketing-portal-infra
 
+          # Compile TypeScript to JavaScript
+      - name: Compile TypeScript
+        run: tsc cypress/support/PWAHealthCheck.ts
+      
+      - name: API Health Check
+        run: node cypress/support/PWAHealthCheck.js
+        env:
+          HOST: ${{ inputs.HOSTNAME }}
+          FUNCTIONS_WORKER_RUNTIME: node
+
       - run: |
           git config --global url."https://oauth2:${{ steps.gh-app-auth.outputs.token }}@github.com".insteadOf ssh://git@github.com
           npm ci
-
-      - name: Start App
-        run: |
-          nohup npm run start:test & # Run the app in the background
-          sleep 30 # Wait for a while to ensure the app starts
-          curl --retry 5 --retry-delay 10 --retry-connrefused ${{ inputs.HOSTNAME }}
 
       - name: Run Cypress tests
         run: npx cypress run --env grep=@integration
