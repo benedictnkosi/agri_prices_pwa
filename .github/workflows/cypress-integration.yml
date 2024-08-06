@@ -49,6 +49,7 @@ jobs:
         run: npm run cypress:run
         env:
           BASEURL: ${{ inputs.HOSTNAME }}
+          API_URL: "https://func-ticketing-sit-euw-000.azurewebsites.net"
 
       - name: Upload Cypress screenshots
         if: always() # Ensure this step runs even if the previous step fails

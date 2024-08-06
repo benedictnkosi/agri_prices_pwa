@@ -1,7 +1,6 @@
 describe("get products", () => {
- const apiUrl = `https://func-ticketing-sit-euw-000.azurewebsites.net`;
-  //const apiUrl = `http://localhost:5173`;
-  console.log(apiUrl);
+  const apiUrl = Cypress.env('API_URL');
+  console.log(apiUrl); 
 
   it("all products are displayed @integration", () => {
     cy.request(`${apiUrl}/api/products`).then((response) => {

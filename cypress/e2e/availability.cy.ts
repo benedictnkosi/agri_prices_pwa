@@ -1,8 +1,7 @@
 
 describe("get availability", () => {
-  const apiUrl = `https://func-ticketing-sit-euw-000.azurewebsites.net`;
-  //const apiUrl = `http://localhost:5173`;
-  console.log(apiUrl);
+  const apiUrl = Cypress.env('API_URL');
+  console.log(apiUrl); 
 
   it("Should display available timeslots for a product @integration", () => {
     const expectedTimeslots = [
@@ -25,15 +24,15 @@ describe("get availability", () => {
         .find("button")
         .click();
   
-      cy.get("._time-slot_srgut_11").each(($el, index) => {
+      cy.get('div[cy-tag="time-slots"]').each(($el, index) => {
         console.log("Index : " + index);
         const expectedTime = expectedTimeslots[index].time;
         const expectedPrice = expectedTimeslots[index].price;
   
         // Verify the time, comment to check the pipeline
-        cy.wrap($el).find("div:first").should("have.text", expectedTime);
+        cy.wrap($el).find('div[cy-tag="time-slot-time"]').should("have.text", expectedTime);
         // Verify the price
-        cy.wrap($el).find("._price_srgut_28").should("have.text", expectedPrice);
+        cy.wrap($el).find('div[cy-tag="time-slot-price"]').should("have.text", expectedPrice);
       });
     });
 

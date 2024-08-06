@@ -13,4 +13,7 @@ export default defineConfig({
       return config;
     },
   },
+  env: {
+    API_URL: process.env.API_URL, // Read the API_URL from the environment
+  },
 });
