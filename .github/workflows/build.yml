@@ -99,7 +99,7 @@ jobs:
 
 
   Integration-Tests-SIT:
-    needs: [publish]
+    needs: [build]
     if: github.event_name == 'push'
     uses: ./.github/workflows/cypress-integration.yml
     with:
@@ -109,7 +109,7 @@ jobs:
       contents: write
 
   Integration-Tests-DEV:
-    needs: [publish]
+    needs: [build]
     if: github.event_name == 'pull'
     uses: ./.github/workflows/cypress-integration.yml
     with:
