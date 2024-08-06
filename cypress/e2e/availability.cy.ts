@@ -1,12 +1,10 @@
-import { checkPWAHealth } from "../support/PWAHealthCheck";
-
 describe("get availability", () => {
   const apiUrl = Cypress.env('API_URL');
   console.log(apiUrl); 
 
   before(() => {
     // Check the health of the PWA
-    checkPWAHealth();
+    cy.checkPWAHealth();
   });
 
   it("Should display available timeslots for a product @integration", () => {

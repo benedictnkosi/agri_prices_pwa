@@ -27,7 +27,7 @@ async function waitForAppToShutdown(url: string, attempts: number, delay: number
   }
 }
 
-const checkHealth = async (url: string, attempts: number, delay: number) => {
+export async function checkHealth(url: string, attempts: number, delay: number) {
   for (let i = 1; i <= attempts; i++) {
     try {
       const response = await axios.get(url);
@@ -50,25 +50,11 @@ const checkHealth = async (url: string, attempts: number, delay: number) => {
   }
 };
 
-async function runHealthCheckAfterShutdown() {
+export async function runHealthCheckAfterShutdown() {
   await waitForAppToShutdown(host, 120, 5000);
   await checkHealth(host, 120, 5000);
   //check sit api is up
   await checkHealth('https://func-ticketing-sit-euw-000.azurewebsites.net/api/products', 120, 5000);
-}
-
-export const checkPWAHealth = async () => {
-  if (host.includes('sit')) {
-    runHealthCheckAfterShutdown().catch(error => {
-      console.error('An unexpected error occurred during shutdown:', error);
-      process.exit(1);
-    });
-  } else {
-    checkHealth(host, 120, 5000).catch(error => {
-      console.error('An unexpected error occurred:', error);
-      process.exit(1);
-    });
-  }
 }
 
 

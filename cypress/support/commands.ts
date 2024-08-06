@@ -1,4 +1,7 @@
 /// <reference types="cypress" />
+
+import { checkHealth, runHealthCheckAfterShutdown } from "./PWAHealthCheck";
+
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
@@ -44,4 +47,19 @@ Cypress.Commands.add("lauchApp", () => {
       });
     },
   });
+});
+
+Cypress.Commands.add("checkPWAHealth", () => {
+  const host = `${process.env.HOST}/`;
+  if (host.includes("sit")) {
+    runHealthCheckAfterShutdown().catch((error) => {
+      console.error("An unexpected error occurred during shutdown:", error);
+      process.exit(1);
+    });
+  } else {
+    checkHealth(host, 120, 5000).catch((error) => {
+      console.error("An unexpected error occurred:", error);
+      process.exit(1);
+    });
+  }
 });
