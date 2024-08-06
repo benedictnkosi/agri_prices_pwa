@@ -19,11 +19,11 @@ const ProductListItem = ({
   };
   return (
     <li
-      className={`${styles["container"]} ${isSelected && styles["selected"]}`}
+    cy-tag="product-list" className={`${styles["container"]} ${isSelected && styles["selected"]}`}
     >
       <div className={styles["details"]}>
-        <span className={styles["title"]}>{product.name}</span>
-        <p>{product.description}</p>
+        <span cy-tag="product-name" className={styles["title"]}>{product.name}</span>
+        <p cy-tag="product-description">{product.description}</p>
       </div>
       <div
         className={`${styles["footer"]} ${isSelected && styles["selected"]}`}
@@ -31,14 +31,14 @@ const ProductListItem = ({
         <div className={styles["column"]}>
           <div className={styles["price"]}>
             <span className={styles["row"]}>From</span>
-            <span className={styles["value"]}>
+            <span cy-tag="product-price" className={styles["value"]}>
               {product.currencySymbol}
               {product.price}.00
             </span>
           </div>
         </div>
         <button
-          className={`${styles["column"]} ${styles["button"]}`}
+          cy-tag="select-product-btn" className={`${styles["column"]} ${styles["button"]}`}
           onClick={onClick}
         >
           {isSelected ? "Selected" : "Select"}

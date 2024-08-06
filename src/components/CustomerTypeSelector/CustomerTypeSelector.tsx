@@ -59,17 +59,17 @@ const CustomerTypeRow: React.FC<CustomerTypeRowProps> = ({
 }) => (
   <div className="m-4 border border-white border-opacity-25 rounded-1">
     <div className={`${styles["customer-type-row"]} row`}>
-      <div className="col-md-8">{label}</div>
+      <div cy-tag="customer-type" className="col-md-8">{label}</div>
       <div className="col-md-4 flex d-flex justify-content-end">
-        <button
+        <button cy-tag="decrement-btn"
           className="btn btn-secondary"
           onClick={onDecrement}
           disabled={count === 0}
         >
           −
         </button>
-        <span>{count}</span>
-        <button className="btn btn-secondary" onClick={onIncrement}>
+        <span cy-tag="customer-type-count">{count}</span>
+        <button cy-tag="increment-btn" className="btn btn-secondary" onClick={onIncrement}>
           +
         </button>
       </div>

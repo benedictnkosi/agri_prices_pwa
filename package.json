@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "axios": "^1.7.2",
+    "digital-ticketing-pwa": "file:",
     "merlin-ui-kit": "github:MerlinEntertainments/common-merlin-ui-kit#0.0.20",
     "mock-socket": "^9.3.1",
     "react": "^18.3.1",
@@ -23,6 +24,7 @@
     "react-router-dom": "^6.22.3"
   },
   "devDependencies": {
+    "@cypress/grep": "^4.1.0",
     "@types/cypress": "^1.1.3",
     "@types/mocha": "^10.0.7",
     "@types/node": "^18.x",
@@ -32,7 +34,7 @@
     "@typescript-eslint/parser": "^7.8.0",
     "@vite-pwa/assets-generator": "^0.2.4",
     "@vitejs/plugin-react": "^4.2.1",
-    "cypress": "^13.12.0",
+    "cypress": "^13.13.2",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.6",

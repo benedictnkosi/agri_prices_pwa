@@ -46,9 +46,10 @@ jobs:
           curl --retry 5 --retry-delay 10 --retry-connrefused ${{ inputs.HOSTNAME }}
 
       - name: Run Cypress tests
-        run: npm run cypress:run
+        run: npx cypress run --env grep=@integration
         env:
           BASEURL: ${{ inputs.HOSTNAME }}
+          API_URL: "https://func-ticketing-sit-euw-000.azurewebsites.net"
 
       - name: Upload Cypress screenshots
         if: always() # Ensure this step runs even if the previous step fails
