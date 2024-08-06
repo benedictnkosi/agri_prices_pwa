@@ -48,7 +48,7 @@ export async function checkHealth(url: string, attempts: number, delay: number) 
       process.exit(1);
     }
   }
-};
+}
 
 export async function runHealthCheckAfterShutdown() {
   await waitForAppToShutdown(host, 120, 5000);
