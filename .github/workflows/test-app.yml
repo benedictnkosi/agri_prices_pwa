@@ -40,14 +40,12 @@ jobs:
         run: |
           nohup npm run start:test & # Run the app in the background
           sleep 30 # Wait for a while to ensure the app starts
-            curl --retry 5 --retry-delay 10 --retry-connrefused $HOSTNAME
-        env:
-          HOSTNAME: "https://func-ticketing-pwapr${{ github.event.pull_request.number }}-euw-000.azurewebsites.net"
+            curl --retry 5 --retry-delay 10 --retry-connrefused http://localhost:5173
 
       - name: Run Cypress tests
         run: npm run cypress:run
         env:
-          HOSTNAME: "https://func-ticketing-pwapr${{ github.event.pull_request.number }}-euw-000.azurewebsites.net"
+          HOSTNAME: "http://localhost:5173"
 
       - name: Upload Cypress screenshots
         if: always() # Ensure this step runs even if the previous step fails
