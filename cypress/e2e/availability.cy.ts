@@ -1,4 +1,3 @@
-
 describe("get availability", () => {
   const apiUrl = Cypress.env('API_URL');
   console.log(apiUrl); 

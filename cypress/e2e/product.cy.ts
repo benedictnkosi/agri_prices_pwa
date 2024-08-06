@@ -1,3 +1,4 @@
+
 describe("get products", () => {
   const apiUrl = Cypress.env('API_URL');
   console.log(apiUrl); 

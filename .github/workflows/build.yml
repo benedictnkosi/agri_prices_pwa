@@ -110,7 +110,7 @@ jobs:
 
   Integration-Tests-DEV:
     needs: [build]
-    if: github.event_name == 'pull'
+    if: github.event_name == 'pull_request'
     uses: ./.github/workflows/cypress-integration.yml
     with:
       HOSTNAME: "https://ssticketingpwapr${{ github.event.pull_request.number }}00.z6.web.core.windows.net"
