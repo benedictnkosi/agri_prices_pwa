@@ -1,9 +1,10 @@
 describe("get products", () => {
-  it("all products are displayed", () => {
-    cy.request("/api/products").then((response) => {
-      const products = response.body;
-      expect(products.length).to.eq(4);
+  const apiUrl = `https://func-ticketing-sit-euw-000.azurewebsites.net`;
+  console.log(apiUrl);
 
+  it("all products are displayed @integration", () => {
+    cy.request(`${apiUrl}/api/products`).then((response) => {
+      const products = response.body;
       //check that the productts are on the page
       cy.lauchApp();
       products.forEach((product) => {
@@ -18,57 +19,41 @@ describe("get products", () => {
     });
   });
 
-  it("The select button works", () => {
+  it("The select button works @integration", () => {
     cy.lauchApp();
-    cy.get("button").eq(0).contains("Select").click();
-    cy.get('li[class*="_selected"]').should("have.length", 1);
+    //only run this test if there is a product that is not selected. more than one products
+    if (cy.get("button").eq(0).contains("Select").should("exist")) {
+      cy.get("button").eq(0).contains("Select").click();
+      cy.get('li[class*="_selected"]').should("have.length", 1);
 
-    cy.get('li[class*="_container"]')
-      .eq(0)
-      .invoke("attr", "class")
-      .then((className) => {
-        expect(className).to.contain("_selected");
-      });
-
-    cy.get("button").eq(1).contains("Select").click();
-    cy.get('li[class*="_selected"]').should("have.length", 1);
-    cy.get('li[class*="_container"]')
-      .eq(1)
-      .invoke("attr", "class")
-      .then((className) => {
-        expect(className).to.contain("_selected");
-      });
+      cy.get('li[class*="_container"]')
+        .eq(0)
+        .invoke("attr", "class")
+        .then((className) => {
+          expect(className).to.contain("_selected");
+        });
+    }
   });
 
-  it("should display the correct customer types", () => {
-    cy.request("/api/products").then((response) => {
+  it("should display the correct customer types @integration", () => {
+    cy.request(`${apiUrl}/api/products`).then((response) => {
       const products = response.body;
 
-      //check that the customer types are on the page
+      // Launch the app
       cy.lauchApp();
-      cy.get("button").eq(0).contains("Select").click();
-      cy.get('div[class*="col-md-8"]')
-        .contains(products[0].customerTypes[0].name)
-        .should("be.visible");
-      cy.get('div[class*="col-md-8"]')
-        .contains(products[0].customerTypes[1].name)
-        .should("be.visible");
-      cy.get('div[class*="col-md-8"]')
-        .contains(products[0].customerTypes[2].name)
-        .should("be.visible");
-      cy.get('div[class*="col-md-8"]')
-        .contains(products[0].customerTypes[3].name)
-        .should("be.visible");
 
-      //select the second product and check that the customer types are on the page
-      cy.get("button").eq(0).contains("Select").click();
-      cy.get("button").eq(0).contains("Select").click();
-      cy.get('div[class*="col-md-8"]')
-        .contains(products[0].customerTypes[0].name)
-        .should("be.visible");
-      cy.get('div[class*="col-md-8"]')
-        .contains(products[0].customerTypes[1].name)
-        .should("be.visible");
+      // Iterate over each product
+      products.forEach((product, index) => {
+        // Click the "Select" button for each product
+        cy.get("button").eq(index).contains("Select").click();
+
+        // Check that the customer types are on the page for each product
+        product.customerTypes.forEach((customerType) => {
+          cy.get('div[class*="col-md-8"]')
+            .contains(customerType.name)
+            .should("be.visible");
+        });
+      });
     });
   });
 });

@@ -44,7 +44,7 @@ const AvailabilityCalendar: React.FC<AvailabilityCalendarProps> = ({
                 {timeSlots.map((slot, index) => (
                   <div className="col-4 col-sm-3 col-md-2" key={index}>
                     <div
-                      className={`${styles["time-slot"]} ${
+                      cy-tag="time-slots" className={`${styles["time-slot"]} ${
                         selectedTime === slot.time ? styles["selected"] : ""
                       }`}
                       onClick={() => handleTimeSelect(slot.time)}
