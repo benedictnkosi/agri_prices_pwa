@@ -118,3 +118,30 @@ jobs:
         id: import-env
         shell: bash
         run: cat env >> $GITHUB_OUTPUT
+
+  Cypress-tests:
+    uses: ./.github/workflows/test-app.yml
+    secrets: inherit
+    permissions:
+      contents: write
+
+
+  Integration-Tests-SIT:
+    needs: [build]
+    if: github.event_name == 'push'
+    uses: ./.github/workflows/cypress-integration.yml
+    with:
+      HOSTNAME: "https://dfe-ticketing-portal-sit-euw-000-gug5b8bgdyhwhhev.a01.azurefd.net"
+    secrets: inherit
+    permissions:
+      contents: write
+
+  Integration-Tests-DEV:
+    needs: [build]
+    if: github.event_name == 'pull_request'
+    uses: ./.github/workflows/cypress-integration.yml
+    with:
+      HOSTNAME: "https://${{ needs.build.outputs.api_url }}"
+    secrets: inherit
+    permissions:
+      contents: write

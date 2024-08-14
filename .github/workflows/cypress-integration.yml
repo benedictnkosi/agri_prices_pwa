@@ -1,8 +1,11 @@
-name: Cypress Tests
+name: Cypress Integration Tests
 
 on:
-  push:
   workflow_call:
+    inputs:
+      HOSTNAME:
+        type: string
+        required: true
 
 jobs:
   cypress-run:
@@ -36,17 +39,17 @@ jobs:
           git config --global url."https://oauth2:${{ steps.gh-app-auth.outputs.token }}@github.com".insteadOf ssh://git@github.com
           npm ci
 
-      - name: Start App
-        run: |
-          nohup npm run start:test & # Run the app in the background
-          sleep 30 # Wait for a while to ensure the app starts
-            curl --retry 5 --retry-delay 10 --retry-connrefused http://localhost:5173
+      - name: WPA Health Check
+        run: curl --retry 60 --retry-delay 10 --retry-connrefused ${{ inputs.HOSTNAME }}
+
+      - name: SIT Services Health Check
+        run: curl --retry 60 --retry-delay 10 --retry-connrefused https://func-ticketing-sit-euw-000.azurewebsites.net
 
       - name: Run Cypress tests
-        run: npm run cypress:run
+        run: npx cypress run --env grep=@integration
         env:
-          HOSTNAME: "http://localhost:5173"
-          API_URL: "http://localhost:5173"
+          BASEURL: ${{ inputs.HOSTNAME }}
+          API_URL: "https://func-ticketing-sit-euw-000.azurewebsites.net"
 
       - name: Upload Cypress screenshots
         if: always() # Ensure this step runs even if the previous step fails

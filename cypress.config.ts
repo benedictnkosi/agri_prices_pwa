@@ -1,21 +1,20 @@
-import { defineConfig } from "cypress";
+import { defineConfig } from 'cypress';
+import grep from '@cypress/grep/src/plugin';
+import * as process from 'process';
 
 export default defineConfig({
   e2e: {
+    baseUrl: process.env.BASEURL || 'http://localhost:5173',
+    pageLoadTimeout: 20000,
+    requestTimeout: 20000,
+    responseTimeout: 20000,
+    defaultCommandTimeout: 20000,
     setupNodeEvents(on, config) {
-      // implement node event listeners here
-      const environment = config.env.ENV || 'dev'; // Default to 'dev' if ENV is not set
-
-      // Define base URLs for different environments
-      const baseUrls: { [key: string]: string } = {
-        dev: 'http://localhost:5173',
-      };
-
-      // Set the baseUrl based on the environment
-      config.baseUrl = baseUrls[environment];
-
+      grep(config);
       return config;
     },
-    pageLoadTimeout: 10000,
+  },
+  env: {
+    API_URL: process.env.API_URL, // Read the API_URL from the environment
   },
 });
