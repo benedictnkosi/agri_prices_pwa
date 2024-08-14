@@ -14,6 +14,8 @@ jobs:
     strategy:
       matrix:
         node-version: [20.x]
+    outputs:
+      api_url: ${{ steps.import-env.outputs.api_url }}
 
     steps:
       - name: Checkout code
@@ -82,11 +84,37 @@ jobs:
           repository: MerlinEntertainments/digital-ticketing-portal-infra
           event-type: deployment
 
-      - name: Trigger infra pipeline to deploy PR to dev
+      - name: Dispatch an action and get the run ID
         if: github.event_name == 'pull_request'
-        uses: peter-evans/repository-dispatch@v3
+        uses: codex-/return-dispatch@v1
+        id: return_dispatch
+        with:
+          ref: refs/heads/workflow-dispatch
+          token: ${{ steps.gh-app-auth.outputs.token }}
+          repo: digital-ticketing-portal-infra
+          owner: MerlinEntertainments
+          workflow: on-pwa-repo-pull-request.yml
+          workflow_inputs: '{"artifactId": "${{ steps.pull_request_artifact.outputs.artifact-id }}", "pr_number": "${{ github.event.pull_request.number }}"}'
+
+      - name: Await Run ID ${{ steps.return_dispatch.outputs.run_id }}
+        uses: Codex-/await-remote-run@v1.0.0
         with:
           token: ${{ steps.gh-app-auth.outputs.token }}
+          repo: digital-ticketing-portal-infra
+          owner: MerlinEntertainments
+          run_id: ${{ steps.return_dispatch.outputs.run_id }}
+          run_timeout_seconds: 600
+          poll_interval_ms: 5000
+
+      - name: Download infra output artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: env
+          github-token: ${{ steps.gh-app-auth.outputs.token }}
           repository: MerlinEntertainments/digital-ticketing-portal-infra
-          event-type: pr-deployment
-          client-payload: '{"artifactId": "${{ steps.pull_request_artifact.outputs.artifact-id }}", "pr_number": "${{ github.event.pull_request.number }}"}'
+          run-id: ${{ steps.return_dispatch.outputs.run_id }}
+
+      - name: Import environment variables from the file
+        id: import-env
+        shell: bash
+        run: cat env >> $GITHUB_OUTPUT
