@@ -40,7 +40,18 @@ jobs:
           npm ci
 
       - name: WPA Health Check
-        run: curl --retry 60 --retry-delay 10 --retry-connrefused ${{ inputs.HOSTNAME }}
+        run: |
+          retry=0
+          while [ $retry -lt 60 ]; do
+            response=$(curl --retry 1 --retry-delay 10 --retry-connrefused ${{ inputs.HOSTNAME }})
+            if [ $? -eq 0 ]; then
+              break
+            fi
+            retry=$((retry+1))
+            sleep 10
+          done
+          echo "Health check completed after $retry retries"
+          echo "$response"
 
       - name: SIT Services Health Check
         run: curl --retry 60 --retry-delay 10 --retry-connrefused https://func-ticketing-sit-euw-000.azurewebsites.net
