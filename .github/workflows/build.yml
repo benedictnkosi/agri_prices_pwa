@@ -15,7 +15,7 @@ jobs:
       matrix:
         node-version: [20.x]
     outputs:
-      api_url: ${{ steps.import-env.outputs.api_url }}
+      host_name: ${{ steps.import-env.outputs.host_name }}
 
     steps:
       - name: Checkout code
@@ -125,7 +125,6 @@ jobs:
     permissions:
       contents: write
 
-
   Integration-Tests-SIT:
     needs: [build]
     if: github.event_name == 'push'
@@ -141,7 +140,7 @@ jobs:
     if: github.event_name == 'pull_request'
     uses: ./.github/workflows/cypress-integration.yml
     with:
-      HOSTNAME: "https://${{ needs.build.outputs.api_url }}"
+      HOSTNAME: "https://${{ needs.build.outputs.host_name }}"
     secrets: inherit
     permissions:
       contents: write
