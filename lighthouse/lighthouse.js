@@ -1,6 +1,7 @@
 import { exec } from 'child_process';
 import fs from 'fs';
 import path from 'path';
+import os from 'os';
 
 // Assuming arguments are passed in the same order: URL, CONFIG_PATH, TEST_TYPE
 const [,, URL, CONFIG_PATH, TEST_TYPE] = process.argv;
@@ -8,8 +9,14 @@ const [,, URL, CONFIG_PATH, TEST_TYPE] = process.argv;
 // Construct the output file paths
 const outputPath = `${TEST_TYPE}.report.json`;
 
+// Detect the operating system
+const platform = os.platform();
+console.log(`Operating System: ${platform}`);
+
 // Run Lighthouse CLI with custom configuration
-const lighthouseCommand = `xvfb-run --auto-servernum --server-args='-screen 0 1280x1024x24' npx lighthouse "${URL}" --config-path="${CONFIG_PATH}" --output=json --output=html --output-path=./${TEST_TYPE}`;
+const xvfbPrefix = platform === 'linux' ? 'xvfb-run --auto-servernum --server-args="-screen 0 1280x1024x24" ' : '';
+const lighthouseCommand = `${xvfbPrefix}npx lighthouse "${URL}" --config-path="${CONFIG_PATH}" --output=json --output=html --output-path=./${TEST_TYPE}`;
+
 exec(lighthouseCommand, (error, stdout, stderr) => {
   if (error) {
     console.error(`exec error: ${error}`);
