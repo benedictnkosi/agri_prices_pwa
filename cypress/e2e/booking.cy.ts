@@ -1,6 +1,6 @@
 describe("make a booking", () => {
-  const apiUrl = Cypress.env('API_URL');
-  console.log(apiUrl); 
+  const apiUrl = Cypress.env("API_URL");
+  console.log(apiUrl);
 
   it("Should redirect on successful booking @createBooking", () => {
     cy.request(`${apiUrl}/api/products`).then((response) => {
@@ -10,25 +10,39 @@ describe("make a booking", () => {
 
       //select product
       cy.contains("span", products[0].name)
-          .closest("li") 
-          .find("button")
-          .click();
+        .closest("li")
+        .find("button")
+        .click();
 
       //select customer types
       cy.get('div[cy-tag="customer-type"]')
-            .contains(products[0].customerTypes[0].name)
-            .should("be.visible").click();
+        .contains(products[0].customerTypes[0].name)
+        .parent()
+        .parent()
+        .find('button[cy-tag="increment-btn"]')
+        .click();
 
       //select timeslot
-      cy.request(`${apiUrl}/api/availability/${products[0].id}`).then((availabilityResponse) => {
-        const expectedTimeslots = availabilityResponse.body.dates.map((slot) => ({
-          time: slot.date.substring(11, 16),
-          price: `£${slot.price.toFixed(2)}`
-        }));
+      cy.request(`${apiUrl}/api/availability/${products[0].id}`).then(
+        (availabilityResponse) => {
+          const expectedTimeslots = availabilityResponse.body.dates.map(
+            (slot) => ({
+              time: slot.date.substring(11, 16),
+              price: `£${slot.price.toFixed(2)}`,
+            })
+          );
 
-        const expectedTime = expectedTimeslots[0].time;
-        cy.get('div[cy-tag="time-slot-time"]').eq(0).should("have.text", expectedTime).click();
-      });
+          const expectedTime = expectedTimeslots[0].time;
+          cy.get('div[cy-tag="time-slot-time"]')
+            .eq(0)
+            .should("have.text", expectedTime)
+            .click();
+        }
+      );
+
+      //click on the pay with card button
+      cy.get('button[cy-tag="pay-now-button"]').should("exist").click();
+      cy.url().should("include", "/accesso-pay");
     });
   });
 });

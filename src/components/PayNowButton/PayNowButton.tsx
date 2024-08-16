@@ -67,7 +67,7 @@ const PayNowButton: React.FC<PayNowButtonProps> = ({
   return (
     <div className="container mt-4">
       <div className={styles["pay-button"]}>
-        <button cy-data="pay-now-button"
+        <button cy-tag="pay-now-button"
           className={`${styles["column"]} ${styles["button"]}`}
           onClick={() => createBooking()}
         >
