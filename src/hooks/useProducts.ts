@@ -5,13 +5,13 @@ import axios from "axios";
 const apiUrl = import.meta.env.VITE_API_URL;
 const productsUrl = `${apiUrl}/products`;
 
-export const useProducts = () => {
+const useProducts = (
+  setLoading: (loading: boolean) => void,
+  setError: (error: string | null) => void
+) => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<null | string>(null);
-
   useEffect(() => {
-    setLoading(false);
+    setLoading(true);
     setError(null);
     axios
       .get(productsUrl)
@@ -34,8 +34,8 @@ export const useProducts = () => {
   }, []);
 
   return {
-    products,
-    loading,
-    error,
+    products
   };
 };
+
+export default useProducts;

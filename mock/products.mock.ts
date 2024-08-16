@@ -143,4 +143,17 @@ export default (): MockHandler[] => [
       res.end(JSON.stringify(data));
     },
   },
+  {
+    pattern: "/api/bookings",
+    handle: (req, res) => {
+      const data = {
+        productId: "123",
+        redirectUrl: "http://localhost:5173/accesso-pay"
+      };
+      res.setHeader("Content-Type", "application/json");
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.statusCode = 303;
+      res.end(JSON.stringify(data));
+    },
+  }
 ];

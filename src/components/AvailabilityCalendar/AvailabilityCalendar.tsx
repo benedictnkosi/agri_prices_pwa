@@ -8,16 +8,19 @@ import { Alert } from "@merlin-ui-kit/components/Alert/Alert";
 interface AvailabilityCalendarProps {
   productId: string;
   currency: string;
+  onTimeSlotSelect: (timeslot: string) => void;
 }
 const AvailabilityCalendar: React.FC<AvailabilityCalendarProps> = ({
   productId,
   currency,
+  onTimeSlotSelect
 }) => {
   const { timeSlots, loading, error } = useAvailability(productId);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
 
   const handleTimeSelect = (time: string) => {
     setSelectedTime(time);
+    onTimeSlotSelect(time);
   };
 
   return (

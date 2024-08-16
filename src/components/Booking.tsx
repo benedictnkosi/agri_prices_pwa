@@ -1,49 +1,99 @@
-import { useState } from "react";
-import { useProducts } from "../hooks/useProducts";
+import { useEffect, useState } from "react";
+import useProducts from "../hooks/useProducts";
 import { ProductList } from "./ProductList/ProductList";
 import { Product } from "../models/Product";
 import LoadingSpinner from "@merlin-ui-kit/components/Icons/LoadingSpinner";
 import { Alert } from "@merlin-ui-kit/components/Alert/Alert";
 import CustomerTypeSelector from "./CustomerTypeSelector/CustomerTypeSelector";
 import AvailabilityCalendar from "./AvailabilityCalendar/AvailabilityCalendar";
+import PayNowButton from "./PayNowButton/PayNowButton";
+import { BookingModel } from "../models/Booking";
 
 export const Booking = () => {
-  const { products, loading, error } = useProducts();
-  const [selectedProduct, setSelectedProduct] = useState<Product | undefined>();
-  console.log(selectedProduct?.id);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const { products } = useProducts(setLoading, setError);
 
-  const onSelect = (productId: string) => {
-    console.log("here", productId);
-    setSelectedProduct(products.find((product) => product.id === productId));
+  const [selectedProduct, setSelectedProduct] = useState<Product | undefined>();
+  const [selectedCustomerType, setSelectedCustomerType] = useState<Record<number, number> | undefined>();
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>("");
+  const [userBooking, setUserBooking] = useState<BookingModel | undefined>();
+
+  useEffect(() => {
+    const createBooking = (
+      productId: string,
+      timeslot: string,
+      customerTypes: Record<number, number>
+    ): BookingModel => {
+      const unitItems = convertCustomerType(customerTypes);
+      return {
+        productId,
+        availabilityId: timeslot,
+        timeslot,
+        unitItems,
+      };
+    };
+  
+    const hasSelectedCustomer = selectedCustomerType && Object.values(selectedCustomerType).some(value => value > 0);
+
+    if (selectedProduct && hasSelectedCustomer && selectedTimeSlot) {
+      console.log(selectedProduct.id, selectedTimeSlot, selectedCustomerType);
+      const booking = createBooking(selectedProduct.id, selectedTimeSlot, selectedCustomerType);
+      setUserBooking(booking);
+    } else {
+      setUserBooking(undefined);
+    }
+  }, [selectedProduct, selectedCustomerType, selectedTimeSlot]);
+
+  const handleProductSelect = (productId: string) => {
+    const selected = products.find(product => product.id === productId);
+    setSelectedProduct(selected);
   };
+
+  const convertCustomerType = (customerTypes: Record<number, number>) => {
+    const unitItems: { unitId: string }[] = [];
+    Object.entries(customerTypes).forEach(([unitId, count]) => {
+      for (let i = 0; i < count; i++) {
+        unitItems.push({ unitId });
+      }
+    });
+    return unitItems;
+  };
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return (
+      <Alert variant="danger" show={!!error}>
+        {error}
+      </Alert>
+    );
+  }
 
   return (
     <>
-      {loading ? (
-        <LoadingSpinner />
-      ) : (
-        <>
-          {error ? (
-            <Alert variant="danger" show={!!error}>
-              {error}
-            </Alert>
-          ) : (
-            <>
-              <ProductList products={products} onSelect={onSelect} />
-              {selectedProduct && (
-                <div key={selectedProduct.id}>
-                  <CustomerTypeSelector
-                    customerTypes={selectedProduct.customerTypes}
-                  ></CustomerTypeSelector>
-                  <AvailabilityCalendar
-                    productId={selectedProduct.id}
-                    currency={selectedProduct.currencySymbol}
-                  ></AvailabilityCalendar>
-                </div>
-              )}
-            </>
+      <ProductList products={products} onSelect={handleProductSelect} />
+      {selectedProduct && (
+        <div key={selectedProduct.id}>
+          <CustomerTypeSelector
+            customerTypes={selectedProduct.customerTypes}
+            onCustomerTypeSelect={setSelectedCustomerType}
+          />
+          <AvailabilityCalendar
+            productId={selectedProduct.id}
+            currency={selectedProduct.currencySymbol}
+            onTimeSlotSelect={setSelectedTimeSlot}
+          />
+          {userBooking && (
+            <PayNowButton
+              setLoading={setLoading}
+              setError={setError}
+              booking={userBooking}
+            />
           )}
-        </>
+        </div>
       )}
     </>
   );
