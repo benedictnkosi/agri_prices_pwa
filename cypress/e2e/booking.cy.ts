@@ -2,7 +2,7 @@ describe("make a booking", () => {
   const apiUrl = Cypress.env("API_URL");
   console.log(apiUrl);
 
-  it("Should redirect on successful booking @createBooking", () => {
+  it("Should redirect on successful booking @createBooking @integration", () => {
     cy.request(`${apiUrl}/api/products`).then((response) => {
       const products = response.body;
 
