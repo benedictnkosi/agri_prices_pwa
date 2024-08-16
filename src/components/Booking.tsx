@@ -19,14 +19,6 @@ export const Booking = () => {
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>("");
   const [userBooking, setUserBooking] = useState<BookingModel | undefined>();
 
-  // Initialize ticket counts when a product is selected
-  const initialTicketCounts = selectedProduct?.customerTypes.reduce((acc, ticket) => {
-    acc[ticket.id] = 0;
-    return acc;
-  }, {} as { [key: number]: number }) || {};
-
-  const [ticketCounts, setTicketCounts] = useState<{ [key: number]: number }>(initialTicketCounts);
-
   useEffect(() => {
     const createBooking = (
       productId: string,
@@ -88,8 +80,6 @@ export const Booking = () => {
           <CustomerTypeSelector
             customerTypes={selectedProduct.customerTypes}
             onCustomerTypeSelect={setSelectedCustomerType}
-            ticketCounts={ticketCounts}
-            setTicketCounts={setTicketCounts}
           />
           <AvailabilityCalendar
             productId={selectedProduct.id}
