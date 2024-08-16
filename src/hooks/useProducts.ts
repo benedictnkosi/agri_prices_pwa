@@ -31,7 +31,7 @@ const useProducts = (
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [setLoading, setError]);
 
   return {
     products
