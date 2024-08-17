@@ -16,21 +16,6 @@ const PayNowButton: React.FC<PayNowButtonProps> = ({
   setError,
   booking,
 }) => {
-  axios.interceptors.response.use(
-    (response) => {
-      // Any status code that lie within the range of 2xx cause this function to trigger
-      return response;
-    },
-    (error) => {
-      // Any status codes that falls outside the range of 2xx cause this function to trigger
-      if (error.response && error.response.status === 303) {
-        const redirectUrl = error.response.data.redirectUrl;
-        window.location.href = redirectUrl;
-      }
-      return Promise.reject(error);
-    }
-  );
-
   const createBooking = () => {
     setLoading(true);
     setError(null);
@@ -45,11 +30,14 @@ const PayNowButton: React.FC<PayNowButtonProps> = ({
         unitItems: booking.unitItems,
       })
       .then((response) => {
-        if (response.status !== 303) {
+        if (response.status == 200) {
+          const redirectUrl = response.data.redirectUrl;
+          window.location.href = redirectUrl;
+        } else {
           setError(
             "An error occurred while creating the booking. Please try again."
           );
-        } 
+        }
       })
       .catch((error) => {
         if (error.response && error.response.status !== 303) {
@@ -67,7 +55,8 @@ const PayNowButton: React.FC<PayNowButtonProps> = ({
   return (
     <div className="container mt-4">
       <div className={styles["pay-button"]}>
-        <button cy-tag="pay-now-button"
+        <button
+          cy-tag="pay-now-button"
           className={`${styles["column"]} ${styles["button"]}`}
           onClick={() => createBooking()}
         >

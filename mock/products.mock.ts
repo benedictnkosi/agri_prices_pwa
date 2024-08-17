@@ -147,12 +147,12 @@ export default (): MockHandler[] => [
     pattern: "/api/bookings",
     handle: (req, res) => {
       const data = {
-        productId: "123",
-        redirectUrl: "http://localhost:5173/accesso-pay"
+        id: "600043206-239825502",
+        redirectUrl : "https://payfast.io/?cart_id=600043142&cart_key=3974060938"
       };
       res.setHeader("Content-Type", "application/json");
       res.setHeader("Access-Control-Allow-Origin", "*");
-      res.statusCode = 303;
+      res.statusCode = 200;
       res.end(JSON.stringify(data));
     },
   }
