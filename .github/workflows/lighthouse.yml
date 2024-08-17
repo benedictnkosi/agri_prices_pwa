@@ -53,8 +53,8 @@ jobs:
           curl --retry 5 --retry-delay 10 --retry-connrefused http://localhost:5173
         env:
           HOSTNAME: "http://localhost:5173"
-          API_URL: "http://localhost:5173"
-          
+          VITE_API_URL: "http://localhost:5173"
+
       - name: Run Lighthouse Script
         run: |
           cd lighthouse
