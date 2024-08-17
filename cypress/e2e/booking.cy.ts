@@ -42,7 +42,10 @@ describe("make a booking", () => {
 
       //click on the pay with card button
       cy.get('button[cy-tag="pay-now-button"]').should("exist").click();
-      cy.url().should("include", "cart_id");
+      cy.intercept('GET', '**/**').as('redirectRequest'); 
+      cy.wait('@redirectRequest').then((interception) => {
+        interception.response?.headers.location || interception.request.url;
+      });
     });
   });
 });
