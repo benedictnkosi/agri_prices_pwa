@@ -143,4 +143,17 @@ export default (): MockHandler[] => [
       res.end(JSON.stringify(data));
     },
   },
+  {
+    pattern: "/api/bookings",
+    handle: (req, res) => {
+      const data = {
+        id: "600043206-239825502",
+        redirectUrl : "https://payfast.io/?cart_id=600043142&cart_key=3974060938"
+      };
+      res.setHeader("Content-Type", "application/json");
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.statusCode = 200;
+      res.end(JSON.stringify(data));
+    },
+  }
 ];

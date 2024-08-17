@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./CustomerTypeSelector.module.scss";
 import { CustomerType } from "../../models/Product";
 
 interface CustomerTypeSelectorProps {
   customerTypes: CustomerType[];
+  onCustomerTypeSelect: (customerTypes: { [key: number]: number }) => void;
 }
 
 const CustomerTypeSelector: React.FC<CustomerTypeSelectorProps> = ({
   customerTypes,
+  onCustomerTypeSelect
 }) => {
   const initialTicketCounts = customerTypes.reduce((acc, ticket) => {
     acc[ticket.id] = 0;
@@ -18,6 +20,10 @@ const CustomerTypeSelector: React.FC<CustomerTypeSelectorProps> = ({
   const [ticketCounts, setTicketCounts] = useState<{ [key: number]: number }>(
     initialTicketCounts
   );
+
+  useEffect(() => {
+    onCustomerTypeSelect(ticketCounts);
+  }, [ticketCounts, onCustomerTypeSelect]);
 
   const handleTicketChange = (id: number, increment: number) => {
     setTicketCounts((prevCounts) => ({
