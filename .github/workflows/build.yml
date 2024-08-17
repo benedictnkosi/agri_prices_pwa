@@ -97,6 +97,7 @@ jobs:
           workflow_inputs: '{"artifactId": "${{ steps.pull_request_artifact.outputs.artifact-id }}", "pr_number": "${{ github.event.pull_request.number }}"}'
 
       - name: Await Run ID ${{ steps.return_dispatch.outputs.run_id }}
+        if: github.event_name == 'pull_request'  
         uses: Codex-/await-remote-run@v1.0.0
         with:
           token: ${{ steps.gh-app-auth.outputs.token }}
