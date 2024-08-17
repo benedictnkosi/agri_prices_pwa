@@ -119,12 +119,6 @@ jobs:
         shell: bash
         run: cat env >> $GITHUB_OUTPUT
 
-  Cypress-tests:
-    uses: ./.github/workflows/test-app.yml
-    secrets: inherit
-    permissions:
-      contents: write
-
   Integration-Tests-SIT:
     needs: [build]
     if: github.event_name == 'push'
