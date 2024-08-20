@@ -6,6 +6,7 @@ interface PayNowButtonProps {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setError: React.Dispatch<React.SetStateAction<string | null>>;
   booking: BookingModel;
+  attractionId: string;
 }
 
 const apiUrl = import.meta.env.VITE_API_URL;
@@ -15,6 +16,7 @@ const PayNowButton: React.FC<PayNowButtonProps> = ({
   setLoading,
   setError,
   booking,
+  attractionId
 }) => {
   const createBooking = () => {
     setLoading(true);
@@ -27,7 +29,11 @@ const PayNowButton: React.FC<PayNowButtonProps> = ({
         productId: booking.productId,
         availabilityId: timeslot,
         date: timeslot,
-        unitItems: booking.unitItems,
+        unitItems: booking.unitItems
+      }, {
+        headers: {
+          "Attraction-Id": attractionId
+        }
       })
       .then((response) => {
         if (response.status == 200) {

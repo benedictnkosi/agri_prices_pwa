@@ -8,19 +8,34 @@ import CustomerTypeSelector from "./CustomerTypeSelector/CustomerTypeSelector";
 import AvailabilityCalendar from "./AvailabilityCalendar/AvailabilityCalendar";
 import PayNowButton from "./PayNowButton/PayNowButton";
 import { BookingModel } from "../models/Booking";
+import { useLocation } from "react-router-dom";
 
 export const Booking = () => {
   const [loading, setLoading] = useState<boolean>(false);
+  const [attractionId, setAttractionId] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
-  const { products } = useProducts(setLoading, setError);
+  const { products } = useProducts(setLoading, setError, attractionId);
 
   const [selectedProduct, setSelectedProduct] = useState<Product | undefined>();
   const [selectedCustomerType, setSelectedCustomerType] = useState<Record<number, number> | undefined>();
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>("");
   const [userBooking, setUserBooking] = useState<BookingModel | undefined>();
 
+  const location = useLocation();
+
   useEffect(() => {
-    const createBooking = (
+    const params = new URLSearchParams(location.search);
+    const attractionId = params.get("attraction_id");
+
+    if (attractionId) {
+      setAttractionId(attractionId);
+    }else{
+      setError("Attraction ID not set. Please try again.");
+    }
+  }, [location]);
+
+  useEffect(() => {
+    const initiateBooking = (
       productId: string,
       timeslot: string,
       customerTypes: Record<number, number>
@@ -37,8 +52,7 @@ export const Booking = () => {
     const hasSelectedCustomer = selectedCustomerType && Object.values(selectedCustomerType).some(value => value > 0);
 
     if (selectedProduct && hasSelectedCustomer && selectedTimeSlot) {
-      console.log(selectedProduct.id, selectedTimeSlot, selectedCustomerType);
-      const booking = createBooking(selectedProduct.id, selectedTimeSlot, selectedCustomerType);
+      const booking = initiateBooking(selectedProduct.id, selectedTimeSlot, selectedCustomerType);
       setUserBooking(booking);
     } else {
       setUserBooking(undefined);
@@ -74,7 +88,7 @@ export const Booking = () => {
 
   return (
     <>
-      <ProductList products={products} onSelect={handleProductSelect} />
+      {attractionId && <ProductList products={products} onSelect={handleProductSelect} />}
       {selectedProduct && (
         <div key={selectedProduct.id}>
           <CustomerTypeSelector
@@ -86,12 +100,14 @@ export const Booking = () => {
             currency={selectedProduct.currencySymbol}
             setSelectedTime={setSelectedTimeSlot}
             selectedTime={selectedTimeSlot}
+            attractionId={attractionId}
           />
           {userBooking && (
             <PayNowButton
               setLoading={setLoading}
               setError={setError}
               booking={userBooking}
+              attractionId={attractionId}
             />
           )}
         </div>

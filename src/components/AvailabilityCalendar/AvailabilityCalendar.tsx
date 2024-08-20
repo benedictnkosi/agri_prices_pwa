@@ -9,15 +9,17 @@ interface AvailabilityCalendarProps {
   currency: string;
   setSelectedTime: (timeslot: string) => void;
   selectedTime: string | null;
+  attractionId: string;
 }
 const AvailabilityCalendar: React.FC<AvailabilityCalendarProps> = ({
   productId,
   currency,
   setSelectedTime,
   selectedTime,
+  attractionId,
   
 }) => {
-  const { timeSlots, loading, error } = useAvailability(productId);
+  const { timeSlots, loading, error } = useAvailability(productId, attractionId);
 
   const handleTimeSelect = (time: string) => {
     setSelectedTime(time);

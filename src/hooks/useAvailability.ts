@@ -30,7 +30,7 @@ const parseTimeSlots = (apiTimeSlots: ApiTimeSlot[]): TimeSlot[] => {
   });
 };
 
-export const useAvailability = (productId: string) => {
+export const useAvailability = (productId: string, attractionId: string) => {
   const [timeSlots, setTimeslots] = useState<TimeSlot[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<null | string>(null);
@@ -39,7 +39,11 @@ export const useAvailability = (productId: string) => {
     setLoading(false);
     setError(null);
     axios
-      .get(`${availabilityUrl}/${productId}`)
+      .get(`${availabilityUrl}/${productId}`, {
+        headers: {
+          "Attraction-Id": attractionId
+        }
+      })
       .then((response) => {
         if (response.data?.dates?.length === 0) {
           setError("No timeslots found. Please try again.");
@@ -56,7 +60,7 @@ export const useAvailability = (productId: string) => {
       .finally(() => {
         setLoading(false);
       });
-  }, [productId]);
+  }, [attractionId, productId]);
 
   return {
     timeSlots,
