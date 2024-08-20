@@ -32,7 +32,7 @@ const PayNowButton: React.FC<PayNowButtonProps> = ({
         unitItems: booking.unitItems
       }, {
         headers: {
-          "Attraction-Id": attractionId
+          "Merlin-Attraction-Id": attractionId
         }
       })
       .then((response) => {

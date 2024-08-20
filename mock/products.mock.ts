@@ -148,7 +148,7 @@ export default (): MockHandler[] => [
     handle: (req, res) => {
       const data = {
         id: "600043206-239825502",
-        redirectUrl : "https://payfast.io/?cart_id=600043142&cart_key=3974060938"
+        redirectUrl : "https://me-slbrighton.secure.stg-meg-eu.accessoticketing.com/cartView?cart_id=600043368&cart_key=2795887753"
       };
       res.setHeader("Content-Type", "application/json");
       res.setHeader("Access-Control-Allow-Origin", "*");

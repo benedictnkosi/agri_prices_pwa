@@ -14,10 +14,11 @@ const useProducts = (
   useEffect(() => {
     setLoading(true);
     setError(null);
+    if (attractionId) {
       axios
         .get(productsUrl, {
           headers: {
-            "Attraction-Id": attractionId
+            "Merlin-Attraction-Id": attractionId
           }
         })
         .then((response) => {
@@ -36,7 +37,7 @@ const useProducts = (
         .finally(() => {
           setLoading(false);
         });
-
+      }
   }, [setLoading, setError, attractionId]);
 
   return {

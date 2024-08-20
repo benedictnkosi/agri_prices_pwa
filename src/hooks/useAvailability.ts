@@ -41,7 +41,7 @@ export const useAvailability = (productId: string, attractionId: string) => {
     axios
       .get(`${availabilityUrl}/${productId}`, {
         headers: {
-          "Attraction-Id": attractionId
+          "Merlin-Attraction-Id": attractionId
         }
       })
       .then((response) => {
