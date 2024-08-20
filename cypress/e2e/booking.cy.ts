@@ -6,7 +6,7 @@ describe("make a booking", () => {
     cy.request(`${apiUrl}/api/products`).then((response) => {
       const products = response.body;
 
-      cy.lauchApp();
+      cy.launchApp("/?attraction_id=123");
 
       //select product
       cy.contains("span", products[0].name)
@@ -26,7 +26,7 @@ describe("make a booking", () => {
       cy.request(`${apiUrl}/api/availability/${products[0].id}`).then(
         (availabilityResponse) => {
           const expectedTimeslots = availabilityResponse.body.dates.map(
-            (slot) => ({
+            (slot: { date: string; price: number; }) => ({
               time: slot.date.substring(11, 16),
               price: `£${slot.price.toFixed(2)}`,
             })

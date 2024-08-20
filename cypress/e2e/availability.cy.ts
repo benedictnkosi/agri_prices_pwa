@@ -12,7 +12,7 @@ describe("get availability", () => {
           price: `£${slot.price.toFixed(2)}`
         }));
 
-        cy.lauchApp();
+        cy.launchApp("/?attraction_id=123");
    
         cy.contains("span", products[0].name) // Find the span with the specific text
           .closest("li") 
@@ -34,7 +34,7 @@ describe("get availability", () => {
   });
 
   it("Should display message when there are no timeslots", () => {
-    cy.lauchApp();
+    cy.launchApp("/?attraction_id=123");
     cy.contains("span", "No timeslots found") // Find the span with the specific text
       .closest("li") // Find the closest ancestor li element
       .find("button") // Find the button within this li
@@ -43,7 +43,7 @@ describe("get availability", () => {
   });
 
   it("Should display message when there is an error getting timeslots", () => {
-    cy.lauchApp();
+    cy.launchApp("/?attraction_id=123");
     cy.contains("span", "Error for timeslots") // Find the span with the specific text
       .closest("li") // Find the closest ancestor li element
       .find("button") // Find the button within this li

@@ -1,5 +1,5 @@
 declare namespace Cypress {
   interface Chainable {
-    lauchApp(): Chainable<void>;
+    launchApp(path:string): Chainable<void>;
   }
 }

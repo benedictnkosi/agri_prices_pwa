@@ -7,7 +7,7 @@ describe("get products", () => {
     cy.request(`${apiUrl}/api/products`).then((response) => {
       const products = response.body;
       //check that the productts are on the page
-      cy.lauchApp();
+      cy.launchApp("/?attraction_id=123");
       products.forEach((product) => {
         cy.get('span[cy-tag="product-name"]').contains(product.name).should("exist");
 
@@ -21,7 +21,7 @@ describe("get products", () => {
   });
 
   it("The select button works @integration", () => {
-    cy.lauchApp();
+    cy.launchApp("/?attraction_id=123");
     //only run this test if there is a product that is not selected. more than one products
     if (cy.get("button").eq(0).contains("Select").should("exist")) {
       cy.get("button").eq(0).contains("Select").click();
@@ -34,7 +34,7 @@ describe("get products", () => {
       const products = response.body;
 
       // Launch the app
-      cy.lauchApp();
+      cy.launchApp("/?attraction_id=123");
 
       // Iterate over each product
       products.forEach((product, index) => {

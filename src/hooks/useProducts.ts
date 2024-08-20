@@ -12,14 +12,14 @@ const useProducts = (
 ) => {
   const [products, setProducts] = useState<Product[]>([]);
   useEffect(() => {
-    setLoading(true);
-    setError(null);
     if (attractionId) {
+      setLoading(true);
+      setError(null);
       axios
         .get(productsUrl, {
           headers: {
-            "Merlin-Attraction-Id": attractionId
-          }
+            "Merlin-Attraction-Id": attractionId,
+          },
         })
         .then((response) => {
           if (response.data?.length === 0) {
@@ -37,11 +37,11 @@ const useProducts = (
         .finally(() => {
           setLoading(false);
         });
-      }
+    }
   }, [setLoading, setError, attractionId]);
 
   return {
-    products
+    products,
   };
 };
 

@@ -37,8 +37,8 @@
 //   }
 // }
 
-Cypress.Commands.add("lauchApp", () => {
-  cy.visit("/", {
+Cypress.Commands.add("launchApp", (path: string) => {
+  cy.visit(path, {
     onBeforeLoad: (win) => {
       cy.stub(win, "WebSocket").callsFake((url) => {
         return new WebSocket(url); // mock socket
