@@ -7,7 +7,7 @@ describe("get availability", () => {
     cy.request(`${apiUrl}/api/products`).then((response) => {
       const products = response.body;
       cy.request(`${apiUrl}/api/availability/${products[0].id}`).then((availabilityResponse) => {
-        const expectedTimeslots = availabilityResponse.body.dates.map((slot) => ({
+        const expectedTimeslots = availabilityResponse.body.dates.map((slot: { date: string; price: number; }) => ({
           time: slot.date.substring(11, 16),
           price: `£${slot.price.toFixed(2)}`
         }));

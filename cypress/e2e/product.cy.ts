@@ -3,9 +3,17 @@ describe("get products", () => {
   const apiUrl = Cypress.env('API_URL');
   console.log(apiUrl); 
 
+  interface Product {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    customerTypes: { name: string }[];
+  }
+
   it("all products are displayed @integration", () => {
     cy.request(`${apiUrl}/api/products`).then((response) => {
-      const products = response.body;
+      const products:Product[] = response.body;
       //check that the productts are on the page
       cy.launchApp("/?attraction_id=123");
       products.forEach((product) => {
@@ -31,7 +39,7 @@ describe("get products", () => {
 
   it("should display the correct customer types @integration", () => {
     cy.request(`${apiUrl}/api/products`).then((response) => {
-      const products = response.body;
+      const products: Product[] = response.body;
 
       // Launch the app
       cy.launchApp("/?attraction_id=123");
