@@ -1,7 +1,15 @@
 import React from "react";
 import styles from "./LineGraph.module.scss";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 interface LineGraphProps {
   prices: {
@@ -28,7 +36,10 @@ export const LineGraph: React.FC<LineGraphProps> = ({ prices }) => {
 
   // Group data by date and calculate the average of average_price
   const groupedData = prices.reduce((acc, item) => {
-    const date = new Date(item.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    const date = new Date(item.date).toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+    });
     if (!acc[date]) {
       acc[date] = { sum: 0, count: 0 };
     }
@@ -47,15 +58,26 @@ export const LineGraph: React.FC<LineGraphProps> = ({ prices }) => {
     <div className={"container mt-4"}>
       <div className={styles["market-list"]}>
         <div className={styles["section-header"]}>Average Prices</div>
-        <div className={`${styles["card-container"]} ${styles["negative-margin-left"]}`}>
-        <ResponsiveContainer width="100%" height={400}>
-            <LineChart data={data}>
-            <CartesianGrid stroke="#eee" strokeDasharray="3 3"  />
+        <div
+          className={`${styles["card-container"]} ${styles["negative-margin-left"]}`}
+        >
+          <ResponsiveContainer width="100%" height={400}>
+            <LineChart
+              width={500}
+              height={300}
+              data={data}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="date" />
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="average_price" stroke="#31C48D"/>
+              <Line
+                type="monotone"
+                dataKey="average_price"
+                stroke="#8884d8"
+                activeDot={{ r: 8 }}
+              />
             </LineChart>
           </ResponsiveContainer>
         </div>

@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { Alert, Spinner } from "flowbite-react";
-import styles from "./CommodityPrices.module.scss";
+import styles from "./Pages.module.scss";
 import axios from "axios";
 import { useParams } from 'react-router-dom';
-import { FilterModel } from "../../models/FilterModel";
-import { TopProvinces } from "../TopProvinces/TopProvinces";
-import { PeriodFilter } from "../PeriodFilter/PeriodFilter";
-import { LineGraph } from "../LineGraph/LineGraph"; 
-import { PriceModel } from "../../models/PriceModel";
-import { DynamicFilter } from "../DynamicFilter/DynamicFilter";
+import { FilterModel } from "../models/FilterModel";
+import { TopProvinces } from "./TopProvinces/TopProvinces";
+import { PeriodFilter } from "./PeriodFilter/PeriodFilter";
+import { LineGraph } from "./LineGraph/LineGraph"; 
+import { PriceModel } from "../models/PriceModel";
+import { DynamicFilter } from "./DynamicFilter/DynamicFilter";
+import NavBar from "./CardWithButton copy/NavBar";
 
 
 export const CommodityPrices = () => {
@@ -22,7 +23,6 @@ export const CommodityPrices = () => {
   const [filter, setFilter] = useState<FilterModel>({});
   const apiUrl = import.meta.env.VITE_API_URL;
   const pricesUrl = `${apiUrl}/public/prices`;
-  
   
   const handleGradeClick = (value: string) => {
     if (value === grade) {
@@ -87,7 +87,9 @@ export const CommodityPrices = () => {
   
   return (
     <>
-    <div className="container mt-4">
+    <NavBar showBackButton={true}/>
+      
+    <div className="container mt-4 pr-4">
       <div className={styles["market-list"]}>
         <div className={styles["section-header"]}>{commodity}</div>
       </div>

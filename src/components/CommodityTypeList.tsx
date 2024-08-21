@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Spinner } from "flowbite-react";
-import CardWithButton from "./../CardWithButton/CardWithButton";
+import CardWithButton from "./CardWithButton/CardWithButton";
 import { useNavigate } from "react-router-dom";
-import styles from "./CommodityTypeList.module.scss";
+import styles from "./Pages.module.scss";
+import NavBar from "./CardWithButton copy/NavBar";
 
 export const CommodityTypeList = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -24,6 +25,8 @@ export const CommodityTypeList = () => {
 
   return (
     <>
+    <NavBar showBackButton={true}/>
+
     <div className="container mt-4">
       <div className={styles["market-list"]}>
         <div className={styles["section-header"]}>What are you interested in today?</div>

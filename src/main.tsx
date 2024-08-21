@@ -4,9 +4,9 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./index.scss";
 import Layout from "./layout";
 import { Markets } from "./components/Markets";
-import { CommodityTypeList } from "./components/CommodityTypeList/CommodityTypeList";
-import { CommodityList } from "./components/CommodityList/CommodityList";
-import { CommodityPrices } from "./components/CommodityPrices/CommodityPrices";
+import { CommodityTypeList } from "./components/CommodityTypeList";
+import { CommodityList } from "./components/CommodityList";
+import { CommodityPrices } from "./components/CommodityPrices";
 
 const router = createBrowserRouter([
   {
