@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import styles from "./DynamicFilter.module.scss";
 import axios from "axios";
 import { FilterModel } from "../../models/FilterModel";
-import { Alert, Button } from "flowbite-react";
-import { HiInformationCircle } from "react-icons/hi";
 
 interface DynamicFilterProps {
   filter: FilterModel;
