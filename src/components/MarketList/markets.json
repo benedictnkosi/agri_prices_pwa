@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "title": "Durban",
+        "description": "187 Kitchener Road, Shop 1, Durban, 4001",
+        "image": "/images/markets/durban.jpg"
+    },
+    {
+        "id": 2,
+        "title": "Johannesburg",
+        "description": "123 market road, Johannesburg, 2001",
+        "image": "/images/markets/johannesburg.jpg"
+    },
+    {
+        "id": 3,
+        "title": "Cape Town",
+        "description": "184 cape road, Cape Town, 8001",
+        "image": "/images/markets/capetown.jpg"
+    }
+]

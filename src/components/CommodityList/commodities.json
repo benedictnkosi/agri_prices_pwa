@@ -1,0 +1,322 @@
+[
+  {
+    "name": "Apple",
+    "type": "fruit",
+    "image": "/images/commodity/apple.jpeg"
+  },
+  {
+    "name": "Apricot",
+    "type": "fruit",
+    "image": "/images/commodity/apricot.jpeg"
+  },
+  {
+    "name": "Avocado",
+    "type": "fruit",
+    "image": "/images/commodity/avocado.jpeg"
+  },
+  {
+    "name": "Banana",
+    "type": "fruit",
+    "image": "/images/commodity/banana.jpeg"
+  },
+  {
+    "name": "Blackberries",
+    "type": "fruit",
+    "image": "/images/commodity/blackberries.jpeg"
+  },
+  {
+    "name": "Blueberries",
+    "type": "fruit",
+    "image": "/images/commodity/blueberries.jpeg"
+  },
+  {
+    "name": "Dragon Fruit",
+    "type": "fruit",
+    "image": "/images/commodity/dragonfruit.jpeg"
+  },
+  {
+    "name": "Fig (Other)",
+    "type": "fruit",
+    "image": "/images/commodity/fig(other).jpeg"
+  },
+  {
+    "name": "Gooseberries",
+    "type": "fruit",
+    "image": "/images/commodity/gooseberries.jpeg"
+  },
+  {
+    "name": "Granadillas",
+    "type": "fruit",
+    "image": "/images/commodity/granadillas.jpeg"
+  },
+  {
+    "name": "Grapes",
+    "type": "fruit",
+    "image": "/images/commodity/grapes.jpeg"
+  },
+  {
+    "name": "Grapefruit",
+    "type": "fruit",
+    "image": "/images/commodity/grapefruit.jpeg"
+  },
+  {
+    "name": "Guavas",
+    "type": "fruit",
+    "image": "/images/commodity/guavas.jpeg"
+  },
+  {
+    "name": "Jack Fruit",
+    "type": "fruit",
+    "image": "/images/commodity/jackfruit.jpeg"
+  },
+  {
+    "name": "Kiwi Fruit",
+    "type": "fruit",
+    "image": "/images/commodity/kiwifruit.jpeg"
+  },
+  {
+    "name": "Kumquat",
+    "type": "fruit",
+    "image": "/images/commodity/kumquat.jpeg"
+  },
+  {
+    "name": "Lemon",
+    "type": "fruit",
+    "image": "/images/commodity/lemon.jpeg"
+  },
+  {
+    "name": "Limes",
+    "type": "fruit",
+    "image": "/images/commodity/limes.jpeg"
+  },
+  {
+    "name": "Litchi",
+    "type": "fruit",
+    "image": "/images/commodity/litchi.jpeg"
+  },
+  {
+    "name": "Mango",
+    "type": "fruit",
+    "image": "/images/commodity/mango.jpeg"
+  },
+  {
+    "name": "Melons",
+    "type": "fruit",
+    "image": "/images/commodity/melons.jpeg"
+  },
+  {
+    "name": "Naartjie",
+    "type": "fruit",
+    "image": "/images/commodity/naartjie.jpeg"
+  },
+  {
+    "name": "Nectarine",
+    "type": "fruit",
+    "image": "/images/commodity/nectarine.jpeg"
+  },
+  {
+    "name": "Orange",
+    "type": "fruit",
+    "image": "/images/commodity/orange.jpeg"
+  },
+  {
+    "name": "Papinos",
+    "type": "fruit",
+    "image": "/images/commodity/papinos.jpeg"
+  },
+  {
+    "name": "Pawpaw",
+    "type": "fruit",
+    "image": "/images/commodity/pawpaw.jpeg"
+  },
+  {
+    "name": "Peach",
+    "type": "fruit",
+    "image": "/images/commodity/peach.jpeg"
+  },
+  {
+    "name": "Pear",
+    "type": "fruit",
+    "image": "/images/commodity/pear.jpeg"
+  },
+  {
+    "name": "Pineapple",
+    "type": "fruit",
+    "image": "/images/commodity/pineapple.jpeg"
+  },
+  {
+    "name": "Plum",
+    "type": "fruit",
+    "image": "/images/commodity/plum.jpeg"
+  },
+  {
+    "name": "Pomegranates",
+    "type": "fruit",
+    "image": "/images/commodity/pomegranates.jpeg"
+  },
+  {
+    "name": "Raspberries",
+    "type": "fruit",
+    "image": "/images/commodity/raspberries.jpeg"
+  },
+    {
+      "name": "Cucumbers",
+      "type": "vegetable",
+      "image": "/images/commodity/cucumbers.jpeg"
+    },
+    {
+      "name": "Curry Leaves",
+      "type": "vegetable",
+      "image": "/images/commodity/curryleaves.jpeg"
+    },
+    {
+      "name": "Dhania",
+      "type": "vegetable",
+      "image": "/images/commodity/dhania.jpeg"
+    },
+    {
+      "name": "Dill",
+      "type": "vegetable",
+      "image": "/images/commodity/dill.jpeg"
+    },
+    {
+      "name": "Double Beans",
+      "type": "vegetable",
+      "image": "/images/commodity/doublebeans.jpeg"
+    },
+    {
+      "name": "Fennel Green",
+      "type": "vegetable",
+      "image": "/images/commodity/fennelgreen.jpeg"
+    },
+    {
+      "name": "Garlic",
+      "type": "vegetable",
+      "image": "/images/commodity/garlic.jpeg"
+    },
+    {
+      "name": "Gem Squashes",
+      "type": "vegetable",
+      "image": "/images/commodity/gemsquashes.jpeg"
+    },
+    {
+      "name": "Ghadrah Beans",
+      "type": "vegetable",
+      "image": "/images/commodity/ghadrahbeans.jpeg"
+    },
+    {
+      "name": "Ginger",
+      "type": "vegetable",
+      "image": "/images/commodity/ginger.jpeg"
+    },
+    {
+      "name": "Green Beans",
+      "type": "vegetable",
+      "image": "/images/commodity/greenbeans.jpeg"
+    },
+    {
+      "name": "Greenmealies",
+      "type": "vegetable",
+      "image": "/images/commodity/greenmealies.jpeg"
+    },
+    {
+      "name": "Habanero",
+      "type": "vegetable",
+      "image": "/images/commodity/habanero.jpeg"
+    },
+    {
+      "name": "Herbs",
+      "type": "vegetable",
+      "image": "/images/commodity/herbs.jpeg"
+    },
+    {
+      "name": "Hubbard Squashes",
+      "type": "vegetable",
+      "image": "/images/commodity/hubbardsquashes.jpeg"
+    },
+    {
+      "name": "Kale",
+      "type": "vegetable",
+      "image": "/images/commodity/kale.jpeg"
+    },
+    {
+      "name": "Kohl Rabi",
+      "type": "vegetable",
+      "image": "/images/commodity/kohlrabi.jpeg"
+    },
+    {
+      "name": "Leeks",
+      "type": "vegetable",
+      "image": "/images/commodity/leeks.jpeg"
+    },
+    {
+      "name": "Lettuce",
+      "type": "vegetable",
+      "image": "/images/commodity/lettuce.jpeg"
+    },
+    {
+      "name": "Marrows",
+      "type": "vegetable",
+      "image": "/images/commodity/marrows.jpeg"
+    },
+    {
+      "name": "Methibaji",
+      "type": "vegetable",
+      "image": "/images/commodity/methibaji.jpeg"
+    },
+    {
+      "name": "Mushrooms",
+      "type": "vegetable",
+      "image": "/images/commodity/mushrooms.jpeg"
+    },
+    {
+      "name": "Okra",
+      "type": "vegetable",
+      "image": "/images/commodity/okra.jpeg"
+    },
+    {
+      "name": "Onions",
+      "type": "vegetable",
+      "image": "/images/commodity/onions.jpeg"
+    },
+    {
+      "name": "Parsley",
+      "type": "vegetable",
+      "image": "/images/commodity/parsley.jpeg"
+    },
+    {
+      "name": "Patty Pans",
+      "type": "vegetable",
+      "image": "/images/commodity/pattypans.jpeg"
+    },
+    {
+      "name": "Peas",
+      "type": "vegetable",
+      "image": "/images/commodity/peas.jpeg"
+    },
+    {
+      "name": "Peppers",
+      "type": "vegetable",
+      "image": "/images/commodity/peppers.jpeg"
+    },
+    {
+      "name": "Potatoes",
+      "type": "vegetable",
+      "image": "/images/commodity/potatoes.jpeg"
+    },
+    {
+      "name": "Pumpkins",
+      "type": "vegetable",
+      "image": "/images/commodity/pumpkins.jpeg"
+    },
+    {
+      "name": "Radish",
+      "type": "vegetable",
+      "image": "/images/commodity/radish.jpeg"
+    },
+    {
+      "name": "Rhubarb",
+      "type": "vegetable",
+      "image": "/images/commodity/rhubarb.jpeg"
+    }
+  ]

@@ -33,7 +33,7 @@ describe("get availability", () => {
     });
   });
 
-  it("Should display message when there are no timeslots", () => {
+  it("Should display message when there are no timeslots @notimeslots", () => {
     cy.launchApp("/?attraction_id=123");
     cy.contains("span", "No timeslots found") // Find the span with the specific text
       .closest("li") // Find the closest ancestor li element
@@ -42,7 +42,7 @@ describe("get availability", () => {
     cy.get(".fade").should("contain", "No timeslots found. Please try again.");
   });
 
-  it("Should display message when there is an error getting timeslots", () => {
+  it("Should display message when there is an error getting timeslots @notimeslots", () => {
     cy.launchApp("/?attraction_id=123");
     cy.contains("span", "Error for timeslots") // Find the span with the specific text
       .closest("li") // Find the closest ancestor li element

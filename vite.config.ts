@@ -39,9 +39,6 @@ export default defineConfig({
     mockServer(),
   ],
   resolve: {
-    alias: {
-      "@merlin-ui-kit": "merlin-ui-kit/dist",
-    },
   },
   preview: {
     port: 5173,

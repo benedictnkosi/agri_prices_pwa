@@ -3,12 +3,27 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./index.scss";
 import Layout from "./layout";
-import { Booking } from "./components/Booking";
+import { Markets } from "./components/Markets";
+import { CommodityTypeList } from "./components/CommodityTypeList/CommodityTypeList";
+import { CommodityList } from "./components/CommodityList/CommodityList";
+import { CommodityPrices } from "./components/CommodityPrices/CommodityPrices";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Booking></Booking>,
+    element: <Markets/>,
+  },
+  {
+    path: "/types",
+    element: <CommodityTypeList/>,
+  },
+  {
+    path: "/commodities/:type",
+    element: <CommodityList/>,
+  },
+  {
+    path: "/prices/:commodity", // Add the new route
+    element: <CommodityPrices />, // Use the new component
   },
 ]);
 

@@ -1,5 +1,5 @@
 {
-  "name": "digital-ticketing-pwa",
+  "name": "agri-prices-pwa",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -15,13 +15,16 @@
     "cypress:record": "cypress run --record --key"
   },
   "dependencies": {
+    "agri-prices-pwa": "file:",
     "axios": "^1.7.2",
     "digital-ticketing-pwa": "file:",
-    "merlin-ui-kit": "github:MerlinEntertainments/common-merlin-ui-kit#0.0.20",
+    "flowbite": "^2.3.0",
+    "flowbite-react": "^0.9.0",
     "mock-socket": "^9.3.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.22.3"
+    "react-router-dom": "^6.22.3",
+    "recharts": "^2.12.7"
   },
   "devDependencies": {
     "@cypress/grep": "^4.1.0",
@@ -34,17 +37,19 @@
     "@typescript-eslint/parser": "^7.8.0",
     "@vite-pwa/assets-generator": "^0.2.4",
     "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.20",
     "cypress": "^13.13.2",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.6",
     "lighthouse": "^12.1.0",
+    "postcss": "^8.4.41",
     "sass": "^1.77.6",
+    "tailwindcss": "^3.4.10",
     "typescript": "^5.2.2",
     "vite": "^5.2.10",
     "vite-plugin-mock-server": "^1.2.0",
-    "vite-plugin-pwa": "^0.20.0",
-    "workbox-core": "^7.1.0"
+    "vite-plugin-pwa": "^0.20.0"
   },
   "overrides": {
     "sharp": "0.32.6",

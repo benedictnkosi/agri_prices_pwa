@@ -1,0 +1,18 @@
+.market-list {
+  position: relative;
+  height: fit-content;
+  padding-bottom: 1rem;
+  min-height: 100%;
+  font-size: 15px;
+}
+
+
+.card-container {
+  display: flex;
+  justify-content: space-between; /* Adjust as needed */
+  gap: 1rem; /* Adjust the gap between cards as needed */
+}
+
+.negative-margin-left {
+  margin-left: -20px;
+}

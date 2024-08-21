@@ -1,57 +1,11 @@
-@import "@merlin-ui-kit/main.merlin.scss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-body,
-:root {
-  --dark-text-color: #{$dark-text-color};
-  --text-color: #{$text-color};
-  --remove-color: #{$danger};
-  --primary: #{$primary};
-  background: linear-gradient(
-    238.67deg,
-    #{$background-color} -2.21%,
-    #{$background-color-dark} 49.39%
-  );
-  color-scheme: light dark;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
-body {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-
-  @if mixin-exists(text) {
-    @include text(body-text-large);
+.section-header {
+    font-size: 1.2rem;
+      font-weight: 200;
+      margin-bottom: 1rem;
   }
-
-  a {
-    color: var(--text-color);
-  }
-
-  @if mixin-exists(heading) {
-    h1 {
-      @include heading(h1);
-    }
-
-    h2 {
-      @include heading(h2);
-    }
-
-    h3 {
-      @include heading(h3);
-    }
-
-    h4 {
-      @include heading(h4);
-    }
-
-    h5 {
-      @include heading(h5);
-    }
-  }
-}
+  
