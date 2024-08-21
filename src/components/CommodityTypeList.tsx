@@ -3,7 +3,7 @@ import { Spinner } from "flowbite-react";
 import CardWithButton from "./CardWithButton/CardWithButton";
 import { useNavigate } from "react-router-dom";
 import styles from "./Pages.module.scss";
-import NavBar from "./CardWithButton copy/NavBar";
+import NavBar from "./NavBar/NavBar";
 
 export const CommodityTypeList = () => {
   const [loading, setLoading] = useState<boolean>(false);

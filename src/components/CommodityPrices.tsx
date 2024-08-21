@@ -9,7 +9,7 @@ import { PeriodFilter } from "./PeriodFilter/PeriodFilter";
 import { LineGraph } from "./LineGraph/LineGraph"; 
 import { PriceModel } from "../models/PriceModel";
 import { DynamicFilter } from "./DynamicFilter/DynamicFilter";
-import NavBar from "./CardWithButton copy/NavBar";
+import NavBar from "./NavBar/NavBar";
 
 
 export const CommodityPrices = () => {
@@ -20,7 +20,7 @@ export const CommodityPrices = () => {
   const [weight, setWeight] = useState<string>("");
   const [grade, setGrade] = useState<string>("");
   const [prices, setPrices] = useState<PriceModel[]>([]);
-  const [filter, setFilter] = useState<FilterModel>({});
+  const [filter, setFilter] = useState<FilterModel>({} as FilterModel);
   const apiUrl = import.meta.env.VITE_API_URL;
   const pricesUrl = `${apiUrl}/public/prices`;
   
@@ -89,7 +89,7 @@ export const CommodityPrices = () => {
     <>
     <NavBar showBackButton={true}/>
       
-    <div className="container mt-4 pr-4">
+    <div className="container mt-4 p-4">
       <div className={styles["market-list"]}>
         <div className={styles["section-header"]}>{commodity}</div>
       </div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { MarketList } from "./MarketList/MarketList";
 import { Spinner } from "flowbite-react";
-import NavBar from "./CardWithButton copy/NavBar";
+import NavBar from "./NavBar/NavBar";
 export const Markets = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
