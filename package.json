@@ -17,6 +17,7 @@
   "dependencies": {
     "agri-prices-pwa": "file:",
     "axios": "^1.7.2",
+    "bootstrap": "^5.3.3",
     "digital-ticketing-pwa": "file:",
     "flowbite": "^2.3.0",
     "flowbite-react": "^0.9.0",
