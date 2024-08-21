@@ -91,7 +91,7 @@ export const CommodityPrices = () => {
       
     <div className="container mt-4 p-4">
       <div className={styles["market-list"]}>
-        <div className={styles["section-header"]}>{commodity}</div>
+        <div className={styles["main-header"]}>{commodity}</div>
       </div>
       <TopProvinces filter={filter} />
       <PeriodFilter setPeriod={setPeriod} period={period}/>

@@ -1,5 +1,5 @@
 import CardWithButton from "../CardWithButton/CardWithButton";
-import styles from "./MarketList.module.scss";
+import styles from "../Pages.module.scss";
 import markets from "./markets.json";
 import { useNavigate } from "react-router-dom";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./LineGraph.module.scss";
+import styles from "../Pages.module.scss";
 import {
   LineChart,
   Line,

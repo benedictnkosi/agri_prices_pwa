@@ -1,4 +1,4 @@
-import styles from "./PeriodFilter.module.scss";
+import styles from "../Pages.module.scss";
 import { Button } from "flowbite-react";
 
 interface PeriodFilterProps {

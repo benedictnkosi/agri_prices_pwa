@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "./DynamicFilter.module.scss";
+import styles from "../Pages.module.scss";
 import axios from "axios";
 import { FilterModel } from "../../models/FilterModel";
 import { Button } from "flowbite-react";
@@ -64,6 +64,7 @@ export const DynamicFilter: React.FC<DynamicFilterProps> = ({
           <div className={styles["card-container"]}>
             {topFilters.map(
               (tempFilter: { filterField: string; count: string }) => (
+                tempFilter.filterField.length > 0 && (
                 <Button
                   key={tempFilter.filterField}
                   onClick={() => setValue(tempFilter.filterField)}
@@ -73,6 +74,7 @@ export const DynamicFilter: React.FC<DynamicFilterProps> = ({
                   {tempFilter.filterField}
                   {field === "weight" ? " kg" : ""}
                 </Button>
+                )
               )
             )}
           </div>

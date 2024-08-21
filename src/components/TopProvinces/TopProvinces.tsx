@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "./TopProvinces.module.scss";
+import styles from "../Pages.module.scss";
 import axios from "axios";
 import { FilterModel } from "../../models/FilterModel";
 import TopSalesCard from "../TopSalesCard/TopSalesCard";
