@@ -159,6 +159,11 @@
     "type": "fruit",
     "image": "/images/commodity/raspberries.jpeg"
   },
+  {
+    "name": "Cabbage",
+    "type": "vegetable",
+    "image": "/images/commodity/cabbage.jpeg"
+  },
     {
       "name": "Cucumbers",
       "type": "vegetable",
