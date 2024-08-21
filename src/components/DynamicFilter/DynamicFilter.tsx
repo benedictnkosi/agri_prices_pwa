@@ -37,6 +37,7 @@ export const DynamicFilter: React.FC<DynamicFilterProps> = ({
           grade: filter.grade,
           weight: filter.weight,
           period: filter.period,
+          commodity:filter.cultivar,
           field: field,
         },
       })
@@ -47,20 +48,13 @@ export const DynamicFilter: React.FC<DynamicFilterProps> = ({
           setshowFilter(true);
         }
       });
-  }, [
-    field,
-    filter.commodity,
-    filter.grade,
-    filter.period,
-    filter.weight,
-    pricesUrl,
-  ]);
+  }, [field, filter.commodity, filter.cultivar, filter.grade, filter.period, filter.weight, pricesUrl]);
 
   return (
     showFilter && (
       <div className="container mt-4">
         <div className={styles["market-list"]}>
-          <div className={styles["section-header"]}>Filter by {field}</div>
+          <div className={styles["section-header"]}>Filter by {field} (Sorted by popularity)</div>
           <div className={styles["card-container"]}>
             {topFilters.map(
               (tempFilter: { filterField: string; count: string }) => (

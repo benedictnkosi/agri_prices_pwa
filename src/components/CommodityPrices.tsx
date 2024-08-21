@@ -19,6 +19,7 @@ export const CommodityPrices = () => {
   const [period, setPeriod] = useState<string>("6");
   const [weight, setWeight] = useState<string>("");
   const [grade, setGrade] = useState<string>("");
+  const [cultivar, setCultivar] = useState<string>("");
   const [prices, setPrices] = useState<PriceModel[]>([]);
   const [filter, setFilter] = useState<FilterModel>({} as FilterModel);
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -30,7 +31,6 @@ export const CommodityPrices = () => {
     }else{
       setGrade(value);
     }
-   
   }
 
   const handleWeightClick = (value: string) => {
@@ -39,7 +39,14 @@ export const CommodityPrices = () => {
     }else{
       setWeight(value);
     }
-    
+  }
+
+  const handleCultivarClick = (value: string) => {
+    if (value === weight) {
+      setCultivar("");
+    }else{
+      setCultivar(value);
+    }
   }
 
   useEffect(() => {
@@ -47,11 +54,12 @@ export const CommodityPrices = () => {
       commodity: commodity || "",
       grade: grade,
       weight: weight,
-      period: period
+      period: period,
+      cultivar: cultivar
     }; 
 
     setFilter(filter);
-  }, [commodity, grade, period, weight]);
+  }, [commodity, cultivar, grade, period, weight]);
 
   useEffect(() => {
     setLoading(true);
@@ -63,13 +71,14 @@ export const CommodityPrices = () => {
         grade: grade,
         weight: weight,
         period: period,
+        cultivar: cultivar
       },
     }).then((response) => {
       setLoading(false);
       console.log(response.data);
       setPrices(response.data);
     });
-  }, [commodity, period, pricesUrl, weight, grade]);
+  }, [commodity, period, pricesUrl, weight, grade, cultivar]);
 
   if (loading) {
     return <div className="text-center">
@@ -97,6 +106,7 @@ export const CommodityPrices = () => {
       <PeriodFilter setPeriod={setPeriod} period={period}/>
       <DynamicFilter filter={filter} setValue={handleWeightClick} value={weight} field="weight" />
       <DynamicFilter filter={filter} setValue={handleGradeClick} value={grade} field="grade" />
+      <DynamicFilter filter={filter} setValue={handleCultivarClick} value={cultivar} field="commodity" />
       <LineGraph prices={prices}/>
     </div>
     </>

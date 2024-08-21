@@ -35,9 +35,9 @@
     "image": "/images/commodity/dragonfruit.jpeg"
   },
   {
-    "name": "Fig (Other)",
+    "name": "Fig",
     "type": "fruit",
-    "image": "/images/commodity/fig(other).jpeg"
+    "image": "/images/commodity/fig.jpeg"
   },
   {
     "name": "Gooseberries",
@@ -315,7 +315,7 @@
       "image": "/images/commodity/peppers.jpeg"
     },
     {
-      "name": "Potatoes",
+      "name": "Potato",
       "type": "vegetable",
       "image": "/images/commodity/potatoes.jpeg"
     },
@@ -335,7 +335,7 @@
       "image": "/images/commodity/rhubarb.jpeg"
     },
     {
-      "name": "Rocket (Arugula)",
+      "name": "Rocket",
       "type": "vegetable",
       "image": "/images/commodity/rocket_arugula.jpeg"
     },
@@ -350,7 +350,7 @@
       "image": "/images/commodity/salad_herb.jpeg"
     },
     {
-      "name": "Sou-Sou (Chayote)",
+      "name": "Sou-Sou",
       "type": "vegetable",
       "image": "/images/commodity/sou_sou_chayote.jpeg"
     },
@@ -360,17 +360,17 @@
       "image": "/images/commodity/spearmint.jpeg"
     },
     {
-      "name": "Spinach (Baby)",
+      "name": "Spinach",
       "type": "vegetable",
       "image": "/images/commodity/spinach_baby.jpeg"
     },
     {
-      "name": "Sweet Potatoes (All varieties)",
+      "name": "Sweet Potatoes",
       "type": "vegetable",
       "image": "/images/commodity/sweet_potatoes_all_varieties.jpeg"
     },
     {
-      "name": "Sweetcorn (Corn, Baby Corn)",
+      "name": "Sweetcorn",
       "type": "vegetable",
       "image": "/images/commodity/sweetcorn_corn_baby_corn.jpeg"
     },
@@ -380,7 +380,7 @@
       "image": "/images/commodity/thyme.jpeg"
     },
     {
-      "name": "Tomatoes (All varieties)",
+      "name": "Tomatoes",
       "type": "vegetable",
       "image": "/images/commodity/tomatoes_all_varieties.jpeg"
     },
@@ -388,11 +388,6 @@
       "name": "Turnips",
       "type": "vegetable",
       "image": "/images/commodity/turnips.jpeg"
-    },
-    {
-      "name": "Vegetables Miscellaneous (General category)",
-      "type": "vegetable",
-      "image": "/images/commodity/vegetables_miscellaneous_general_category.jpeg"
     },
     {
       "name": "Watercress",

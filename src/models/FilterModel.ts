@@ -3,4 +3,5 @@ export type FilterModel = {
   grade: string;
   weight: string;
   period: string;
+  cultivar: string;
 };

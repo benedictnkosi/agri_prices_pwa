@@ -53,13 +53,17 @@ export const TopProvinces : React.FC<TopProvincesProps> = ({
     <div className={styles["market-list"]}>
       <div className={styles["section-header"]}>Regions with highest tonnage</div>
       <div className={styles["card-container"]}>
-        {topProvinces.map((province: {province: string ; totalSales: string}) => (
-          <TopSalesCard 
-            key={province.province}
-            amount={formatAmount(Number(province.totalSales))} 
-            province={province.province} 
-          />
-        ))}
+        {topProvinces.map((province: {province: string ; totalSales: string}) => {
+          return (
+            province.province.length > 1 && (
+              <TopSalesCard 
+                key={province.province}
+                amount={formatAmount(Number(province.totalSales))} 
+                province={province.province} 
+              />
+            )
+          );
+        })}
       </div>
     </div>
   </div>
