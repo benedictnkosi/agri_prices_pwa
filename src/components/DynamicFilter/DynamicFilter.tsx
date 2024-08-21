@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./DynamicFilter.module.scss";
 import axios from "axios";
 import { FilterModel } from "../../models/FilterModel";
+import { Button } from "flowbite-react";
 
 interface DynamicFilterProps {
   filter: FilterModel;
