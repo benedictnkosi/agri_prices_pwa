@@ -32,7 +32,18 @@
   display: flex;
   justify-content: space-between; /* Adjust as needed */
   gap: 1rem; /* Adjust the gap between cards as needed */
+  flex-wrap: wrap;
 }
+
+.card-container-no-wrap {
+  display: flex;
+  justify-content: space-between; /* Adjust as needed */
+  gap: 1rem; /* Adjust the gap between cards as needed */
+  flex-wrap: nowrap;
+}
+
+
+
 
 .negative-margin-left {
   margin-left: -20px;
@@ -43,4 +54,8 @@
   top: 0;
   background-color: white; /* Ensure the header has a background */
   z-index: 1; /* Ensure the header is above other content */
+}
+
+.place-content-evenly{
+  justify-content: space-evenly;
 }

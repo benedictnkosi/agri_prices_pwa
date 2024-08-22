@@ -11,8 +11,8 @@ const TopSalesCard: React.FC<TopSalesCardProps> = ({
 }) => {
   return (
     <Card
-          className="w-36 mb-5"
-          horizontal
+    className="w-full sm:w-36 mb-5" // Use w-full for small screens and w-36 for larger screens
+    horizontal
         >
           <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             {amount}

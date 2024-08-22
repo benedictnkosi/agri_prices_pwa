@@ -17,7 +17,7 @@ export const PeriodFilter : React.FC<PeriodFilterProps> = ({
     <div className="container mt-4">
     <div className={styles["market-list"]}>
       <div className={styles["section-header"]}>How much data do you want to see?</div>
-      <div className={styles["card-container"]}>
+      <div className={styles["card-container-no-wrap"]}>
       <Button onClick={() => setPeriod("1")}  gradientDuoTone="greenToBlue"
         {...(period !== "1" && { outline: true })}
         >

@@ -18,7 +18,7 @@ const NavBar: React.FC<NavBarProps> = ({ showBackButton }) => {
   }
 
   return (
-    <Navbar fluid rounded>
+    <Navbar fluid rounded className="place-content-evenly">
       <Navbar.Brand href="/">
         <img
           src="/images/logo.jpeg"

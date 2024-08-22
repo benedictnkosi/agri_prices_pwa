@@ -81,7 +81,7 @@ export const DynamicFilter: React.FC<DynamicFilterProps> = ({
                   >
                     {tempFilter.filterField === "0" && field === "weight"
                       ? 0.5
-                      : tempFilter.filterField.replace(new RegExp(filter.commodity, "i"), "")}
+                      : tempFilter.filterField}
                     {field === "weight" ? " kg" : ""}
                   </Button>
                 )

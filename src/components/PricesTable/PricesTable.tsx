@@ -69,7 +69,9 @@ export const PricesTable: React.FC<PricesTableProps> = ({ prices }) => {
                 </Table.Body>
               </Table>
             ) : (
+              <div className="ml-5">
               <Button onClick={() => setShowDetailedTable(true)} outline>Show Detailed Table</Button>
+              </div>
             )}
           </div>
         </div>
