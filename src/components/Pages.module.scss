@@ -37,3 +37,10 @@
 .negative-margin-left {
   margin-left: -20px;
 }
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  background-color: white; /* Ensure the header has a background */
+  z-index: 1; /* Ensure the header is above other content */
+}

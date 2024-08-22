@@ -35,23 +35,28 @@ export const LineGraph: React.FC<LineGraphProps> = ({ prices }) => {
   console.log("prices in line graph call " + prices);
 
   // Group data by date and calculate the average of average_price
-  const groupedData = prices.reduce((acc, item) => {
-    const date = new Date(item.date).toLocaleDateString("en-GB", {
-      day: "numeric",
-      month: "short",
-    });
-    if (!acc[date]) {
-      acc[date] = { sum: 0, count: 0 };
-    }
-    acc[date].sum += Number(item.average_price);
-    acc[date].count += 1;
-    return acc;
-  }, {} as Record<string, { sum: number; count: number }>);
+  const groupedAVGData = prices.reduce((acc, item) => {
+      const date = new Date(item.date).toLocaleDateString("en-GB", {
+        day: "numeric",
+        month: "short",
+      });
+      if (!acc[date]) {
+        acc[date] = { sum: 0, count: 0, lowSum: 0,highSum: 0 };
+      }
+      acc[date].sum += Number(item.average_price);
+      acc[date].lowSum += Number(item.low_price);
+      acc[date].highSum += Number(item.high_price);
+      acc[date].count += 1;
+      return acc;
+    }, {} as Record<string, { sum: number; count: number; lowSum: number; highSum: number  }>);
 
+  
   // Transform grouped data into the desired format
-  const data = Object.keys(groupedData).map((date) => ({
+  const data = Object.keys(groupedAVGData).map((date) => ({
     date,
-    average_price: groupedData[date].sum / groupedData[date].count,
+    "Average": Math.floor(groupedAVGData[date].sum / groupedAVGData[date].count),
+    "Low": Math.floor(groupedAVGData[date].lowSum / groupedAVGData[date].count),
+    "High": Math.floor(groupedAVGData[date].highSum / groupedAVGData[date].count),
   }));
 
   return (
@@ -71,13 +76,28 @@ export const LineGraph: React.FC<LineGraphProps> = ({ prices }) => {
               <XAxis dataKey="date" />
               <YAxis />
               <Tooltip />
-              <Legend />
+              <Legend  />
               <Line
                 type="monotone"
-                dataKey="average_price"
+                dataKey="Average"
                 stroke="#8884d8"
                 activeDot={{ r: 8 }}
               />
+
+      <Line
+                type="monotone"
+                dataKey="Low"
+                stroke="#ff0000"
+                activeDot={{ r: 8 }}
+              />
+
+<Line
+                type="monotone"
+                dataKey="High"
+                stroke="#82ca9d"
+                activeDot={{ r: 8 }}
+              />
+              
             </LineChart>
           </ResponsiveContainer>
         </div>

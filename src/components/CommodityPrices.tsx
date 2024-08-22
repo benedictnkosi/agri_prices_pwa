@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import { Alert, Spinner } from "flowbite-react";
 import styles from "./Pages.module.scss";
 import axios from "axios";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { FilterModel } from "../models/FilterModel";
-import { TopProvinces } from "./TopProvinces/TopProvinces";
+import { SalesDirection } from "./SalesDirection/SalesDirection";
 import { PeriodFilter } from "./PeriodFilter/PeriodFilter";
-import { LineGraph } from "./LineGraph/LineGraph"; 
+import { LineGraph } from "./LineGraph/LineGraph";
 import { PriceModel } from "../models/PriceModel";
 import { DynamicFilter } from "./DynamicFilter/DynamicFilter";
 import NavBar from "./NavBar/NavBar";
-
+import { PricesTable } from "./PricesTable/PricesTable";
+import { TopProvinces } from "./TopProvinces/TopProvinces";
 
 export const CommodityPrices = () => {
   const { commodity } = useParams<{ commodity: string }>(); // Grab the type from the URL
@@ -24,30 +25,30 @@ export const CommodityPrices = () => {
   const [filter, setFilter] = useState<FilterModel>({} as FilterModel);
   const apiUrl = import.meta.env.VITE_API_URL;
   const pricesUrl = `${apiUrl}/public/prices`;
-  
+
   const handleGradeClick = (value: string) => {
     if (value === grade) {
       setGrade("");
-    }else{
+    } else {
       setGrade(value);
     }
-  }
+  };
 
   const handleWeightClick = (value: string) => {
     if (value === weight) {
       setWeight("");
-    }else{
+    } else {
       setWeight(value);
     }
-  }
+  };
 
   const handleCultivarClick = (value: string) => {
     if (value === weight) {
       setCultivar("");
-    }else{
+    } else {
       setCultivar(value);
     }
-  }
+  };
 
   useEffect(() => {
     const filter: FilterModel = {
@@ -55,8 +56,8 @@ export const CommodityPrices = () => {
       grade: grade,
       weight: weight,
       period: period,
-      cultivar: cultivar
-    }; 
+      cultivar: cultivar,
+    };
 
     setFilter(filter);
   }, [commodity, cultivar, grade, period, weight]);
@@ -64,51 +65,77 @@ export const CommodityPrices = () => {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    axios
-    .get(pricesUrl, {
-      params: {
-        crop: commodity,
-        grade: grade,
-        weight: weight,
-        period: period,
-        cultivar: cultivar
-      },
-    }).then((response) => {
-      setLoading(false);
-      console.log(response.data);
-      setPrices(response.data);
-    });
+
+    if (commodity && period) {
+      axios
+        .get(pricesUrl, {
+          params: {
+            crop: commodity,
+            grade: grade,
+            weight: weight,
+            period: period,
+            cultivar: cultivar,
+          },
+        })
+        .then((response) => {
+          setLoading(false);
+          console.log(response.data);
+          setPrices(response.data);
+        });
+    }
+   
   }, [commodity, period, pricesUrl, weight, grade, cultivar]);
 
   if (loading) {
-    return <div className="text-center">
-    <Spinner aria-label="Extra large spinner example" size="xl" />
-  </div>;
+    return (
+      <div className="text-center">
+        <Spinner aria-label="Extra large spinner example" size="xl" />
+      </div>
+    );
   }
 
   if (error) {
     return (
-      <Alert color="failure" onDismiss={() => alert('Alert dismissed!')}>
-      {error}
-    </Alert>
+      <Alert color="failure" onDismiss={() => alert("Alert dismissed!")}>
+        {error}
+      </Alert>
     );
   }
-  
+
   return (
     <>
-    <NavBar showBackButton={true}/>
-      
-    <div className="container mt-4 p-4">
-      <div className={styles["market-list"]}>
-        <div className={styles["main-header"]}>{commodity}</div>
+      <NavBar showBackButton={true} />
+
+      <div className="container mt-4 p-4">
+        <div className={styles["market-list"]}>
+          <div className={styles["card-container"]}>
+            <div className={styles["main-header"]}>{commodity}</div>
+            <SalesDirection filter={filter} prices={prices}/>
+          </div>
+        </div>
+        <TopProvinces filter={filter} />
+        <PeriodFilter setPeriod={setPeriod} period={period} />
+        <DynamicFilter
+          filter={filter}
+          setValue={handleWeightClick}
+          value={weight}
+          field="weight"
+        />
+        <DynamicFilter
+          filter={filter}
+          setValue={handleGradeClick}
+          value={grade}
+          field="grade"
+        />
+        <DynamicFilter
+          filter={filter}
+          setValue={handleCultivarClick}
+          value={cultivar}
+          field="commodity"
+        />
+        <LineGraph prices={prices} />
+        <PricesTable prices={prices} />
       </div>
-      <TopProvinces filter={filter} />
-      <PeriodFilter setPeriod={setPeriod} period={period}/>
-      <DynamicFilter filter={filter} setValue={handleWeightClick} value={weight} field="weight" />
-      <DynamicFilter filter={filter} setValue={handleGradeClick} value={grade} field="grade" />
-      <DynamicFilter filter={filter} setValue={handleCultivarClick} value={cultivar} field="commodity" />
-      <LineGraph prices={prices}/>
-    </div>
     </>
   );
 };
