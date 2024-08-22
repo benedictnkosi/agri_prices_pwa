@@ -55,7 +55,7 @@ export const PricesTable: React.FC<PricesTableProps> = ({ prices }) => {
                   <Table.HeadCell>Sales Date</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
-                  {prices.map((price, index) => (
+                  {prices.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map((price, index) => (
                     <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                       <Table.Cell>{price.weight} kg</Table.Cell>
                       {hasGrades && <Table.Cell>{price.grade}</Table.Cell>}

@@ -31,6 +31,7 @@ export const DynamicFilter: React.FC<DynamicFilterProps> = ({
 
   useEffect(() => {
     if (filter.commodity && filter.period) {
+      console.log("filter crop " + filter.commodity);
       axios
         .get(pricesUrl, {
           params: {
@@ -69,6 +70,7 @@ export const DynamicFilter: React.FC<DynamicFilterProps> = ({
           </div>
           <div className={styles["card-container"]}>
             {topFilters.map(
+              
               (tempFilter: { filterField: string; count: string }) =>
                 tempFilter.filterField.length > 0 && (
                   <Button
@@ -79,7 +81,7 @@ export const DynamicFilter: React.FC<DynamicFilterProps> = ({
                   >
                     {tempFilter.filterField === "0" && field === "weight"
                       ? 0.5
-                      : tempFilter.filterField}
+                      : tempFilter.filterField.replace(new RegExp(filter.commodity, "i"), "")}
                     {field === "weight" ? " kg" : ""}
                   </Button>
                 )

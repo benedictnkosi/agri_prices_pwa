@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Alert, Spinner } from "flowbite-react";
+import { Alert, Button, Spinner } from "flowbite-react";
 import styles from "./Pages.module.scss";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -16,6 +16,7 @@ import { TopProvinces } from "./TopProvinces/TopProvinces";
 export const CommodityPrices = () => {
   const { commodity } = useParams<{ commodity: string }>(); // Grab the type from the URL
   const [loading, setLoading] = useState<boolean>(false);
+  const [showFilters, setShowFilters] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [period, setPeriod] = useState<string>("6");
   const [weight, setWeight] = useState<string>("");
@@ -43,12 +44,18 @@ export const CommodityPrices = () => {
   };
 
   const handleCultivarClick = (value: string) => {
-    if (value === weight) {
+    if (value === cultivar) {
       setCultivar("");
     } else {
       setCultivar(value);
     }
   };
+
+  const handleShowFilters = () => {
+    setShowFilters(true);
+  };
+
+  
 
   useEffect(() => {
     const filter: FilterModel = {
@@ -83,16 +90,9 @@ export const CommodityPrices = () => {
           setPrices(response.data);
         });
     }
-   
   }, [commodity, period, pricesUrl, weight, grade, cultivar]);
 
-  if (loading) {
-    return (
-      <div className="text-center">
-        <Spinner aria-label="Extra large spinner example" size="xl" />
-      </div>
-    );
-  }
+
 
   if (error) {
     return (
@@ -110,31 +110,54 @@ export const CommodityPrices = () => {
         <div className={styles["market-list"]}>
           <div className={styles["card-container"]}>
             <div className={styles["main-header"]}>{commodity}</div>
-            <SalesDirection filter={filter} prices={prices}/>
+            <SalesDirection filter={filter} prices={prices} />
           </div>
         </div>
-        <TopProvinces filter={filter} />
+        <TopProvinces filter={filter} 
+        />
         <PeriodFilter setPeriod={setPeriod} period={period} />
-        <DynamicFilter
-          filter={filter}
-          setValue={handleWeightClick}
-          value={weight}
-          field="weight"
-        />
-        <DynamicFilter
-          filter={filter}
-          setValue={handleGradeClick}
-          value={grade}
-          field="grade"
-        />
-        <DynamicFilter
-          filter={filter}
-          setValue={handleCultivarClick}
-          value={cultivar}
-          field="commodity"
-        />
-        <LineGraph prices={prices} />
-        <PricesTable prices={prices} />
+        <div>
+          {loading ? (
+            <div className="text-center">
+              <Spinner aria-label="Extra large spinner example" size="xl" />
+            </div>
+          ) : (
+            <>
+            {!showFilters ? (
+              <div className="text-center pt-5"> {/* Add text-center class */}
+                <Button onClick={handleShowFilters} gradientDuoTone="greenToBlue" outline>More Filters +</Button>
+              </div>
+            ) : (
+                <>
+                  <DynamicFilter
+                    filter={filter}
+                    setValue={handleWeightClick}
+                    value={weight}
+                    field="weight"
+                  />
+                  <DynamicFilter
+                    filter={filter}
+                    setValue={handleGradeClick}
+                    value={grade}
+                    field="grade"
+                  />
+                  <DynamicFilter
+                    filter={filter}
+                    setValue={handleCultivarClick}
+                    value={cultivar}
+                    field="commodity"
+                  />
+                </>
+              )}
+              <LineGraph
+                prices={prices}
+              />
+              <PricesTable
+                prices={prices}
+              />
+            </>
+          )}
+        </div>
       </div>
     </>
   );
