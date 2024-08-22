@@ -11,9 +11,9 @@ export default defineConfig({
       registerType: "autoUpdate",
 
       manifest: {
-        name: "Plan A Visit",
-        short_name: "Plan A Visit",
-        description: "Plan A Visit",
+        name: "Fresh Market Prices",
+        short_name: "Fresh Prices",
+        description: "Fresh Market Prices is a web application that helps you to get the latest prices of fresh products.",
         theme_color: "#ffffff",
 
         icons: [
