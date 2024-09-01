@@ -54,9 +54,9 @@ export const LineGraph: React.FC<LineGraphProps> = ({ prices }) => {
   // Transform grouped data into the desired format
   const data = Object.keys(groupedAVGData).map((date) => ({
     date,
-    "Average": Number(groupedAVGData[date].sum / groupedAVGData[date].count),
-    "Low": Number(groupedAVGData[date].lowSum / groupedAVGData[date].count),
-    "High":Number( groupedAVGData[date].highSum / groupedAVGData[date].count),
+    "Average": Math.floor(groupedAVGData[date].sum / groupedAVGData[date].count),
+    "Low": Math.floor(groupedAVGData[date].lowSum / groupedAVGData[date].count),
+    "High":Math.floor( groupedAVGData[date].highSum / groupedAVGData[date].count),
   }));
 
   return (

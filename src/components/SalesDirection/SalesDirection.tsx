@@ -46,9 +46,12 @@ export const SalesDirection: React.FC<SalesDirectionProps> = ({
           0
         );
         const $difference = $currentTotal - $previousTotal;
-        const $trend = $difference > 0 ? "up" : "down";
 
-        setSalesData({ difference: $difference, trend: $trend }); // Get the top 3 provinces
+        // Check for NaN cases
+        const $validDifference = isNaN($difference) ? 0 : $difference;
+        const $trend = $validDifference > 0 ? "up" : "down";
+
+        setSalesData({ difference: $validDifference, trend: $trend }); // Get the top 3 provinces
       });
     }
   }, [

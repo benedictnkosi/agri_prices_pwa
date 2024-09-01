@@ -31,7 +31,7 @@ const NavBar: React.FC<NavBarProps> = ({ showBackButton }) => {
       </Navbar.Brand>
 
       {showBackButton && (
-        <div className="flex md:order-2">
+        <div className="flex md:order-2 mt-5">
           <Button onClick={handleBackButtonClick}
             gradientDuoTone="greenToBlue"
             size="sm"

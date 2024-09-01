@@ -113,8 +113,7 @@ export const CommodityPrices = () => {
             <SalesDirection filter={filter} prices={prices} />
           </div>
         </div>
-        <TopProvinces filter={filter} 
-        />
+       
         <PeriodFilter setPeriod={setPeriod} period={period} />
         <div>
           {loading ? (
