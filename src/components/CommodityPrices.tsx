@@ -11,7 +11,6 @@ import { PriceModel } from "../models/PriceModel";
 import { DynamicFilter } from "./DynamicFilter/DynamicFilter";
 import NavBar from "./NavBar/NavBar";
 import { PricesTable } from "./PricesTable/PricesTable";
-import { TopProvinces } from "./TopProvinces/TopProvinces";
 
 export const CommodityPrices = () => {
   const { commodity } = useParams<{ commodity: string }>(); // Grab the type from the URL
