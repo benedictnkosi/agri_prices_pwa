@@ -29,6 +29,7 @@ export const TopProvinces: React.FC<TopProvincesProps> = ({ filter }) => {
             grade: filter.grade,
             weight: filter.weight,
             period: filter.period,
+            market: sessionStorage.getItem("market"),
           },
         })
         .then((response) => {

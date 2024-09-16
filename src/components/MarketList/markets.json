@@ -1,8 +1,121 @@
 [
     {
-        "id": 1,
+        "id": 13,
+        "title": "Johannesburg",
+        "description": "Johannesburg, Gauteng",
+        "image": "/images/markets/johannesburg.jpg",
+        "code": "JOH"
+    },
+    {
+        "id": 16,
+        "title": "Cape Town",
+        "description": "Cape Town, Western Cape",
+        "image": "/images/markets/capetown.jpg",
+        "code": "CAP"
+    },
+    {
+        "id": 2,
         "title": "Durban",
         "description": "81 Flower Rd, Clairwood, Durban, 4052",
-        "image": "/images/markets/durban.jpg"
+        "image": "/images/markets/durban.jpg",
+        "code": "DUR"
+    },
+    {
+        "id": 17,
+        "title": "Bloemfontein (Mangaung)",
+        "description": "Bloemfontein, Free State",
+        "image": "/images/markets/bloemfontein.jpg",
+        "code": "BLO"
+    },
+    {
+        "id": 15,
+        "title": "East London",
+        "description": "East London, Eastern Cape",
+        "image": "/images/markets/east_london.jpg",
+        "code": "EAS"
+    },
+    {
+        "id": 14,
+        "title": "George",
+        "description": "George, Western Cape",
+        "image": "/images/markets/george.jpg",
+        "code": "GEO"
+    },
+    {
+        "id": 12,
+        "title": "Klerksdorp",
+        "description": "Klerksdorp, North West",
+        "image": "/images/markets/klerksdorp.jpg",
+        "code": "KLE"
+    },
+    {
+        "id": 11,
+        "title": "Mpumalanga",
+        "description": "Mpumalanga",
+        "image": "/images/markets/mpumalanga.jpg",
+        "code": "NEA"
+    },
+    {
+        "id": 9,
+        "title": "Nelspruit",
+        "description": "Nelspruit, Mpumalanga",
+        "image": "/images/markets/nelspruit.jpg",
+        "code": "NEL"
+    },
+    {
+        "id": 8,
+        "title": "Pietermaritzburg",
+        "description": "Pietermaritzburg, KwaZulu-Natal",
+        "image": "/images/markets/pietermaritzburg.jpg",
+        "code": "PIE"
+    },
+    {
+        "id": 7,
+        "title": "Port Elizabeth",
+        "description": "Port Elizabeth, Eastern Cape",
+        "image": "/images/markets/port_elizabeth.jpg",
+        "code": "POR"
+    },
+    {
+        "id": 6,
+        "title": "Springs",
+        "description": "Springs, Gauteng",
+        "image": "/images/markets/springs.jpg",
+        "code": "SPR"
+    },
+    {
+        "id": 5,
+        "title": "Tshwane",
+        "description": "Tshwane, Gauteng",
+        "image": "/images/markets/tshwane.jpg",
+        "code": "PRE"
+    },
+    {
+        "id": 10,
+        "title": "Mthatha (Kei)",
+        "description": "Mthatha, Eastern Cape",
+        "image": "/images/markets/mthatha.jpg",
+        "code": "UMT"
+    },
+    {
+        "id": 4,
+        "title": "Vereeniging",
+        "description": "Vereeniging, Gauteng",
+        "image": "/images/markets/vereeniging.jpg",
+        "code": "VER"
+    },
+    {
+        "id": 3,
+        "title": "Welkom",
+        "description": "171 Jan Hofmeyer Road, Welkom, Free State",
+        "image": "/images/markets/welkom.jpg",
+        "code": "WEL"
+    },
+    {
+        "id": 2,
+        "title": "Witbank",
+        "description": "Witbank, Mpumalanga",
+        "image": "/images/markets/witbank.jpg",
+        "code": "WIT"
     }
 ]

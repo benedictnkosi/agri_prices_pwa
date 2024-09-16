@@ -41,6 +41,7 @@ export const DynamicFilter: React.FC<DynamicFilterProps> = ({
             period: filter.period,
             commodity: filter.cultivar,
             field: field,
+            market: sessionStorage.getItem("market"),
           },
         })
         .then((response) => {

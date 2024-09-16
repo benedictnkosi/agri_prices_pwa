@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 export const MarketList = () => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = (marketId: string) => {
+    sessionStorage.setItem("market", marketId);
     navigate("/types");
   };
   return (
@@ -20,7 +21,7 @@ export const MarketList = () => {
             description={market.description}
             image={market.image}
             actionText="View Prices"
-            onClick={handleClick}
+            onClick={() => handleClick(market.code)}
           />
         ))}
       </div>

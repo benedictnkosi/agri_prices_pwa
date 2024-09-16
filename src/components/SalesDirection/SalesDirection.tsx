@@ -37,6 +37,7 @@ export const SalesDirection: React.FC<SalesDirectionProps> = ({
         params: {
           crop: filter.commodity,
           period: filter.period,
+          market: sessionStorage.getItem("market"),
         },
       })
       .then((response) => {

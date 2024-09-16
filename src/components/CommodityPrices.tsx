@@ -81,6 +81,7 @@ export const CommodityPrices = () => {
             weight: weight,
             period: period,
             cultivar: cultivar,
+            market: sessionStorage.getItem("market"),
           },
         })
         .then((response) => {
