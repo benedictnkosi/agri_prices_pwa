@@ -16,6 +16,7 @@ export const CommodityPrices = () => {
   const { commodity } = useParams<{ commodity: string }>(); // Grab the type from the URL
   const [loading, setLoading] = useState<boolean>(false);
   const [showFilters, setShowFilters] = useState<boolean>(false);
+  const [dataFound, setDataFound] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [period, setPeriod] = useState<string>("6");
   const [weight, setWeight] = useState<string>("");
@@ -49,13 +50,7 @@ export const CommodityPrices = () => {
       setCultivar(value);
     }
   };
-
-  const handleShowFilters = () => {
-    setShowFilters(true);
-  };
-
-  
-
+ 
   useEffect(() => {
     const filter: FilterModel = {
       commodity: commodity || "",
@@ -88,6 +83,11 @@ export const CommodityPrices = () => {
           setLoading(false);
           console.log(response.data);
           setPrices(response.data);
+          if (response.data.length === 0) {
+            setDataFound(false);
+          } else {
+            setDataFound(true);
+          }
         });
     }
   }, [commodity, period, pricesUrl, weight, grade, cultivar]);
@@ -124,10 +124,13 @@ export const CommodityPrices = () => {
             <>
             {!showFilters ? (
               <div className="text-center pt-5"> {/* Add text-center class */}
-                <Button onClick={handleShowFilters} gradientDuoTone="greenToBlue" outline>More Filters +</Button>
+                <Button onClick={() => setShowFilters(true)} gradientDuoTone="greenToBlue" outline>More Filters +</Button>
               </div>
             ) : (
                 <>
+                <div className="text-center pt-5"> {/* Add text-center class */}
+                <Button onClick={() => setShowFilters(false)} gradientDuoTone="greenToBlue" outline>Less Filters -</Button>
+              </div>
                   <DynamicFilter
                     filter={filter}
                     setValue={handleWeightClick}
@@ -148,12 +151,18 @@ export const CommodityPrices = () => {
                   />
                 </>
               )}
-              <LineGraph
-                prices={prices}
-              />
-              <PricesTable
-                prices={prices}
-              />
+              {dataFound ? (
+                <>
+                  <LineGraph prices={prices} />
+                  <PricesTable prices={prices} />
+                  </>
+              ) : (
+                <div className="text-center pt-5"> {/* Add text-center class */}
+                  <Alert color="failure">
+                    No data found for the selected filters
+                  </Alert>
+                </div>
+              )}
             </>
           )}
         </div>
