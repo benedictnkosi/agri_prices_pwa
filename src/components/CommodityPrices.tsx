@@ -21,7 +21,7 @@ export const CommodityPrices = () => {
   const [period, setPeriod] = useState<string>("6");
   const [weight, setWeight] = useState<string>("");
   const [grade, setGrade] = useState<string>("");
-  const [cultivar, setCultivar] = useState<string>("");
+  const [variety, setVariety] = useState<string>("");
   const [prices, setPrices] = useState<PriceModel[]>([]);
   const [filter, setFilter] = useState<FilterModel>({} as FilterModel);
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -43,11 +43,11 @@ export const CommodityPrices = () => {
     }
   };
 
-  const handleCultivarClick = (value: string) => {
-    if (value === cultivar) {
-      setCultivar("");
+  const handleVarietyClick = (value: string) => {
+    if (value === variety) {
+      setVariety("");
     } else {
-      setCultivar(value);
+      setVariety(value);
     }
   };
  
@@ -57,11 +57,11 @@ export const CommodityPrices = () => {
       grade: grade,
       weight: weight,
       period: period,
-      cultivar: cultivar,
+      variety: variety,
     };
 
     setFilter(filter);
-  }, [commodity, cultivar, grade, period, weight]);
+  }, [commodity, variety, grade, period, weight]);
 
   useEffect(() => {
     setLoading(true);
@@ -75,7 +75,7 @@ export const CommodityPrices = () => {
             grade: grade,
             weight: weight,
             period: period,
-            cultivar: cultivar,
+            variety: variety,
             market: sessionStorage.getItem("market"),
           },
         })
@@ -90,7 +90,7 @@ export const CommodityPrices = () => {
           }
         });
     }
-  }, [commodity, period, pricesUrl, weight, grade, cultivar]);
+  }, [commodity, period, pricesUrl, weight, grade, variety]);
 
 
 
@@ -145,8 +145,8 @@ export const CommodityPrices = () => {
                   />
                   <DynamicFilter
                     filter={filter}
-                    setValue={handleCultivarClick}
-                    value={cultivar}
+                    setValue={handleVarietyClick}
+                    value={variety}
                     field="commodity"
                   />
                 </>
